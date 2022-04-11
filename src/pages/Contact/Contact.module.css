@@ -1,0 +1,43 @@
+.contact {
+  @apply flex flex-col justify-center items-center gap-10;
+}
+
+.icon {
+  @apply bg-zinc-500 rounded-full p-3;
+  box-shadow: 0 0 0 4px #71717a60, 0 0 0 8px #71717a30;
+}
+
+.icon svg {
+  @apply w-7 h-7;
+}
+
+.buttons {
+  @apply flex justify-between w-full;
+}
+
+.buttons a {
+  @apply px-8 py-3 rounded-full h-fit font-poppins;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.linkedin {
+  background-color: #0e76a8;
+  box-shadow: 0 0 0 4px #0e76a860;
+}
+
+.resume {
+  @apply bg-pink-500;
+  box-shadow: 0 0 0 4px #ec489960;
+}
+
+.resume:hover {
+  box-shadow: 0 0 0 4px #ec489960, 0 0 0 8px #ec489930, 0 0 0 12px #ec489915;
+}
+
+.linkedin:hover {
+  box-shadow: 0 0 0 4px #0e76a860, 0 0 0 8px #0e76a830, 0 0 0 12px #0e76a815;
+}
+
+.buttons a:active {
+  transform: scale(0.95);
+}

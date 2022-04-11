@@ -1,0 +1,12 @@
+.tools {
+  @apply flex md:flex-wrap gap-8 w-full md:justify-center;
+}
+
+.tool {
+  @apply flex flex-row items-center grow shrink-0 gap-3 md:grow-0;
+  @apply py-6 md:text-xl font-poppins;
+}
+
+.tool img {
+  @apply w-8 md:w-16;
+}

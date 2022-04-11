@@ -1,0 +1,17 @@
+.page {
+  @apply flex flex-col md:flex-row justify-center items-center h-screen bg-zinc-800;
+  @apply overflow-y-hidden overflow-x-scroll md:overflow-x-hidden;
+  transition: background-color 0.4s ease;
+}
+
+.page.active {
+  @apply bg-zinc-900;
+}
+
+.title {
+  @apply md:hidden sticky text-center left-6 text-3xl font-medium font-poppins;
+}
+
+.content {
+  @apply flex justify-center items-center p-16 py-12 md:p-96 w-full;
+}

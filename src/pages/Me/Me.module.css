@@ -1,0 +1,39 @@
+.me {
+  @apply flex flex-col-reverse md:flex-row max-w-4xl items-center gap-6;
+}
+
+.text {
+  @apply flex-auto font-poppins font-light;
+}
+
+.name {
+  @apply text-zinc-400;
+}
+
+.pitch {
+  @apply font-semibold text-xl md:text-3xl mb-2;
+}
+
+.bio {
+  @apply text-zinc-200 text-justify mb-8;
+}
+
+.based {
+  @apply md:text-xl text-zinc-400;
+}
+
+.based .mx {
+  @apply inline px-3 py-2 ml-2 rounded-xl text-white border-2 border-zinc-400  ;
+}
+
+.based img {
+  @apply w-4 h-4 inline;
+}
+
+.avatar {
+  @apply flex-none;
+}
+
+.avatar img {
+  @apply rounded-full w-32 md:w-64;
+}
