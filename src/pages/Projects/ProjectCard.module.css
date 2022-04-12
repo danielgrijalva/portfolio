@@ -22,11 +22,3 @@
 .description {
   @apply mb-4;
 }
-
-.tools {
-  @apply flex flex-wrap gap-1;
-}
-
-.tools .tool {
-  @apply px-2 py-1 bg-zinc-600 text-xs rounded-md;
-}

@@ -8,7 +8,7 @@ export const Projects = () => {
         title="Portfolio"
         description="This website!"
         image="portfolio.webp"
-        link={"#"}
+        link={"https://github.com/danielgrijalva/portfolio"}
         tools={["ReactJS", "TailwindCSS"]}
       />
       <ProjectCard

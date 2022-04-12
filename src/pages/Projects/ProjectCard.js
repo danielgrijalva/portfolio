@@ -1,4 +1,4 @@
-import { Card } from "../../components";
+import { Card, ToolList } from "../../components";
 import classes from "./ProjectCard.module.css";
 
 export const ProjectCard = ({ title, description, image, link, tools }) => {
@@ -11,13 +11,7 @@ export const ProjectCard = ({ title, description, image, link, tools }) => {
         {title}
       </a>
       <p className={classes.description}>{description}</p>
-      <div className={classes.tools}>
-        {tools.map((tool) => (
-          <span key={tool} className={classes.tool}>
-            {tool}
-          </span>
-        ))}
-      </div>
+      <ToolList tools={tools} />
     </Card>
   );
 };
