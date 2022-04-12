@@ -1,5 +1,5 @@
 .contact {
-  @apply flex flex-col justify-center items-center gap-10;
+  @apply flex flex-col justify-center items-center gap-6;
 }
 
 .icon {

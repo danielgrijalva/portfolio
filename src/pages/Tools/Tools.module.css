@@ -1,5 +1,5 @@
 .tools {
-  @apply flex md:flex-wrap gap-8 w-full md:justify-center;
+  @apply flex md:flex-wrap gap-8 w-full max-w-3xl md:justify-center;
 }
 
 .tool {

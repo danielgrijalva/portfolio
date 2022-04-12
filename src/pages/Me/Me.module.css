@@ -7,23 +7,23 @@
 }
 
 .name {
-  @apply text-zinc-400;
+  @apply text-sm md:text-base text-zinc-400 mb-1;
 }
 
 .pitch {
-  @apply font-semibold text-xl md:text-3xl mb-2;
+  @apply font-semibold text-xl md:text-3xl mb-3;
 }
 
 .bio {
-  @apply text-zinc-200 text-justify mb-8;
+  @apply text-sm md:text-base text-zinc-200 text-justify;
 }
 
 .based {
-  @apply md:text-xl text-zinc-400;
+  @apply md:text-xl text-zinc-400 mt-10;
 }
 
 .based .mx {
-  @apply inline px-3 py-2 ml-2 rounded-xl text-white border-2 border-zinc-400  ;
+  @apply inline px-3 py-2 ml-2 rounded-xl text-white border-2 border-zinc-400;
 }
 
 .based img {
