@@ -1,0 +1,33 @@
+.item {
+  @apply flex flex-col md:flex-row gap-6 md:h-40 min-w-full last-of-type:pr-10;
+}
+
+.separator {
+  @apply flex md:flex-col items-center justify-center;
+}
+
+.bullet {
+  @apply bg-pink-400 w-3 h-3 rounded-full my-1 md:grow shrink-0;
+  box-shadow: 0 0 0 8px #f9a8d450;
+}
+
+.line {
+  @apply bg-zinc-500  h-px w-full md:w-px md:h-full ml-3 md:my-3;
+}
+
+.item:last-of-type .separator .line {
+  @apply md:bg-transparent;
+}
+
+.company {
+  @apply text-xl font-medium font-poppins mb-2;
+  line-height: 0.8;
+}
+
+.years {
+  @apply text-xs md:text-sm text-zinc-400 font-normal ml-2 align-middle;
+}
+
+.info p {
+  @apply text-zinc-300 mb-4;
+}
