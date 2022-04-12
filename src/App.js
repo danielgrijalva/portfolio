@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Page, NavLink } from "./components";
 import { MenuIcon } from "@heroicons/react/outline";
-import { Contact, Hello, Me, Projects, Tools } from "./pages";
+import { Contact, Experience, Hello, Me, Projects, Tools } from "./pages";
 import "./App.css";
 
 function App() {
@@ -82,13 +82,13 @@ function App() {
         <Page id="hello" title="" onVisible={onVisible}>
           <Hello />
         </Page>
-        <Page id="projects" title="Some of my work" onVisible={onVisible}>
+        <Page id="projects" title="My projects" onVisible={onVisible}>
           <Projects />
         </Page>
         <Page id="experience" title="Experience" onVisible={onVisible}>
-          🚧
+          <Experience />
         </Page>
-        <Page id="tools" title="My current skillset" onVisible={onVisible}>
+        <Page id="tools" title="My skillset" onVisible={onVisible}>
           <Tools />
         </Page>
         <Page id="me" title="About me" onVisible={onVisible}>
