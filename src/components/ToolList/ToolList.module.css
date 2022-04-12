@@ -1,0 +1,7 @@
+.tools {
+  @apply flex flex-wrap gap-1;
+}
+
+.tool {
+  @apply px-2 py-1 bg-zinc-600 text-xs rounded-md;
+}
