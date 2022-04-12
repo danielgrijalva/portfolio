@@ -1,7 +1,0 @@
-.experience {
-  @apply flex flex-wrap justify-center w-full max-w-3xl;
-}
-
-.experience ul {
-  @apply flex md:block md:flex-col gap-8 w-full list-none;
-}

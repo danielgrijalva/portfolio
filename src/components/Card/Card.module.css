@@ -1,3 +1,0 @@
-.card {
-  @apply h-fit p-8 bg-zinc-800 rounded-xl shadow-lg cursor-pointer hover:-translate-y-2 transition-transform;
-}
