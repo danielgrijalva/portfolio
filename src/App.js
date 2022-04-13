@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Page, NavLink } from "./components";
 import { MenuIcon } from "@heroicons/react/outline";
 import { Contact, Experience, Hello, Me, Projects, Tools } from "./pages";
-import avatar from "./images/avatar.webp";
+import { Avatar } from "./media/";
 
 import "./App.css";
 
@@ -24,7 +24,7 @@ function App() {
       <div className="nav-wrapper">
         <div className="brand-wrapper">
           <div className="brand">
-            <img src={avatar} alt="Profile" />
+            <img src={Avatar} alt="Profile" />
             <h1>Daniel Grijalva</h1>
           </div>
           <div className="menu">

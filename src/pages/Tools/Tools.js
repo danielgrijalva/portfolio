@@ -1,44 +1,46 @@
 import classes from "./Tools.module.css";
+import {
+  AWSIcon,
+  CSSIcon,
+  DjangoIcon,
+  GitIcon,
+  HerokuIcon,
+  HTMLIcon,
+  JavaScriptIcon,
+  PythonIcon,
+  ReactIcon,
+} from "../../media/";
 import { Card } from "../../components";
 
 export const Tools = () => {
   return (
     <div className={classes.tools}>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/python.svg"} alt="Python" />
-        Python
+        <PythonIcon /> Python
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/js.svg"} alt="JavaScript" />
-        JavaScript
+        <JavaScriptIcon /> JavaScript
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/react.svg"} alt="React" />
-        React
+        <ReactIcon /> React
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/django.svg"} alt="Django" />
-        Django
+        <DjangoIcon /> Django
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/git.svg"} alt="Git" />
-        Git
+        <GitIcon /> Git
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/html.svg"} alt="HTML" />
-        HTML
+        <HTMLIcon /> HTML
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/css.svg"} alt="CSS" />
-        CSS
+        <CSSIcon /> CSS
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/heroku.svg"} alt="Heroku" />
-        Heroku
+        <HerokuIcon /> Heroku
       </Card>
       <Card className={classes.tool}>
-        <img src={process.env.PUBLIC_URL + "icons/aws.svg"} alt="AWS" />
-        AWS S3
+        <AWSIcon /> AWS S3
       </Card>
     </div>
   );

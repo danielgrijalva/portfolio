@@ -1,4 +1,5 @@
 import classes from "./Me.module.css";
+import { AvatarLarge, MXIcon } from "../../media";
 
 export const Me = () => {
   return (
@@ -16,15 +17,12 @@ export const Me = () => {
         <div className={classes.based}>
           based in
           <div className={classes.mx}>
-            <img src={process.env.PUBLIC_URL + "icons/MX.svg"} alt="" /> México
+            <MXIcon /> México
           </div>
         </div>
       </div>
       <div className={classes.avatar}>
-        <img
-          src={process.env.PUBLIC_URL + "images/avatar-lg.webp"}
-          alt="Profile"
-        />
+        <img src={AvatarLarge} alt="Profile" />
       </div>
     </div>
   );

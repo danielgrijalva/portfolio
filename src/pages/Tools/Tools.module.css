@@ -7,6 +7,6 @@
   @apply py-6 md:text-xl font-poppins;
 }
 
-.tool img {
+.tool svg {
   @apply w-8 md:w-16;
 }

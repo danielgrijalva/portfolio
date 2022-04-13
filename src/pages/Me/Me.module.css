@@ -26,7 +26,7 @@
   @apply inline px-3 py-2 ml-2 rounded-xl text-white border-2 border-zinc-400;
 }
 
-.based img {
+.based svg {
   @apply w-4 h-4 inline;
 }
 

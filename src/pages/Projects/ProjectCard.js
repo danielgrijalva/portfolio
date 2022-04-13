@@ -5,7 +5,7 @@ export const ProjectCard = ({ title, description, image, link, tools }) => {
   return (
     <Card className={classes.project}>
       <div className={classes.banner}>
-        <img src={process.env.PUBLIC_URL + `images/${image}`} alt="" />
+        <img src={image} alt="" />
       </div>
       <a href={link} target="_blank" className={classes.title}>
         {title}
