@@ -4,7 +4,7 @@
 
 .tool {
   @apply flex flex-row items-center grow shrink-0 gap-3 md:grow-0;
-  @apply py-6 md:text-xl font-poppins;
+  @apply py-6 md:text-xl font-poppins transition-none cursor-default hover:-translate-y-0;
 }
 
 .tool svg {
