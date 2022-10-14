@@ -49,7 +49,7 @@ export const Projects = () => {
       />
       <ProjectCard
         title="Datasets"
-        description="I like to build datasets"
+        description="I like to build datasets and answer questions with data"
         image={DatasetsImage}
         link="https://www.kaggle.com/danielgrijalvas"
         tools={["Python", "Pandas"]}
