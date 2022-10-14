@@ -10,9 +10,11 @@ export const Me = () => {
           A software engineer with 3+ years of professional experience.
         </h1>
         <p className={classes.bio}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-          voluptatibus commodi unde, doloremque aliquid eaque, sit voluptates
-          ipsam sint fugiat reprehenderit quasi quo similique hic.
+          I'm a passionate web developer with strong Python experience and data
+          abilities. I love to learn on my own with side projects, and I adapt
+          to new technologies when necessary. I'm eager to learn from my peers
+          and new experiences! Oh and I'm also <em>very</em> into analog
+          photography and music.
         </p>
         <div className={classes.based}>
           based in
