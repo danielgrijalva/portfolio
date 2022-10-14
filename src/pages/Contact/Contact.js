@@ -6,12 +6,10 @@ export const Contact = () => {
   return (
     <div className={classes.contact}>
       <Card className="flex gap-4">
-        <div className="flex flex-col">
+        <a href="mailto:danielgrisoto@gmail.com" className="flex flex-col">
           <span className="text-sm text-zinc-400">Let's get in touch!</span>
-          <a href="mailto:danielgrisoto@gmail.com" className="text-xl">
-            danielgrisoto@gmail.com
-          </a>
-        </div>
+          <span className="text-xl">danielgrisoto@gmail.com</span>
+        </a>
         <div className={classes.icon}>
           <MailIcon />
         </div>
