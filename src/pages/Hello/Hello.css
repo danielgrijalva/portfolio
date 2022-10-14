@@ -10,6 +10,10 @@
   @apply text-pink-300;
 }
 
+.hello .title .highlight .dot {
+  @apply text-white;
+}
+
 /* Transitions */
 
 .fade-enter {

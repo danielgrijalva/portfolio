@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "./Hello.css";
 
-const PASSIONS = ["Python", "great UX/UI", "photography", "data", "music"];
+const PASSIONS = ["Python", "UX/UI", "photography", "data", "music"];
 
 export const Hello = () => {
   const [passionIndex, setPassionIndex] = useState(0);
@@ -14,7 +14,7 @@ export const Hello = () => {
       } else {
         setPassionIndex(passionIndex + 1);
       }
-    }, 2300);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [passionIndex]);
@@ -22,7 +22,7 @@ export const Hello = () => {
   return (
     <div className="hello">
       <h1 className="title">
-        Hello, I am Daniel. I'm a software engineer who loves{" "}
+        Hello. I am Daniel, a software engineer who loves{" "}
         <SwitchTransition>
           <CSSTransition
             key={passionIndex}
@@ -31,7 +31,10 @@ export const Hello = () => {
               node.addEventListener("transitionend", done, false)
             }
           >
-            <span className="highlight">{PASSIONS[passionIndex]}</span>
+            <span className="highlight">
+              {PASSIONS[passionIndex]}
+              <span className="dot">.</span>
+            </span>
           </CSSTransition>
         </SwitchTransition>
       </h1>
