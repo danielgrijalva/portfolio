@@ -6,11 +6,21 @@ export const Experience = () => {
     <div className={classes.experience}>
       <ul>
         <ExperienceItem
+          from="May 2022"
+          to="Present"
+          company="Turn Technologies"
+          position="Software Engineer"
+          tools={["Python", "Flask", "Celery", "APIs", "Docker", "PostgreSQL"]}
+        >
+          As a backend engineer I strengthened our integrations with third-party providers
+          through their REST APIs and our own Flask API. I'm also building backend features as{" "}
+          part of a <a href="https://turn.ai/product/ready">dedicated product</a> team.
+        </ExperienceItem>
+        <ExperienceItem
           from="Feb 2021"
           to="Feb 2022"
           company="A Terceros"
           position="Software Engineer"
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis, minus delectus iure."
           tools={["Django", "JavaScript", "Pytest", "Heroku", "AWS"]}
         >
           Built a mobile-ready web app for managing internal resources,

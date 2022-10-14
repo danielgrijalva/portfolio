@@ -12,7 +12,7 @@
 }
 
 .line {
-  @apply bg-zinc-500  h-px w-full md:w-px md:h-full ml-3 md:my-3;
+  @apply bg-zinc-500  h-px w-full md:w-px md:h-full md:my-3;
 }
 
 .item:last-of-type .separator .line {
@@ -30,4 +30,8 @@
 
 .info p {
   @apply text-zinc-300 mb-4;
+}
+
+.info a {
+  @apply underline;
 }
