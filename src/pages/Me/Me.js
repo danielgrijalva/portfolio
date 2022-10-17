@@ -10,11 +10,13 @@ export const Me = () => {
           A software engineer with 3+ years of professional experience.
         </h1>
         <p className={classes.bio}>
-          I'm a passionate web developer with strong Python experience and data
-          abilities. I love to learn on my own with side projects, and I adapt
-          to new technologies when necessary. I'm eager to learn from my peers
-          and new experiences! Oh and I'm also <em>very</em> into analog
-          photography and music.
+          I'm a driven person who has extensive Python experience, skilled in
+          software development and knowledgeable in a wide range of tools and
+          technologies. I am able to effectively manage my time while working on
+          my own projects, as well as collaborate with others to form a
+          successful team. I'm enthusiastic about UI/UX, front-end technologies
+          and data science. <br />
+          Oh and I'm also <em>very</em> into music and analog photography.
         </p>
         <div className={classes.based}>
           based in
