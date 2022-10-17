@@ -1,5 +1,5 @@
 .item {
-  @apply flex flex-col md:flex-row gap-6 md:h-40 min-w-full last-of-type:pr-10;
+  @apply flex flex-col md:flex-row gap-6 md:h-52 min-w-full last-of-type:pr-10;
 }
 
 .separator {

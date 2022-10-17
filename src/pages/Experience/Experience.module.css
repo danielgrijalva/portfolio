@@ -5,3 +5,7 @@
 .experience ul {
   @apply flex md:block md:flex-col gap-8 w-full list-none;
 }
+
+.experience p > span {
+  @apply block;
+}
