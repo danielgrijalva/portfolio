@@ -7,14 +7,25 @@ export const Experience = () => {
       <ul>
         <ExperienceItem
           from="May 2022"
-          to="Present"
+          to="Oct 2022"
           company="Turn Technologies"
           position="Software Engineer"
           tools={["Python", "Flask", "Celery", "APIs", "Docker", "PostgreSQL"]}
         >
-          As a backend engineer I strengthened our integrations with third-party providers
-          through their REST APIs and our own Flask API. I'm also building backend features as{" "}
-          part of a <a href="https://turn.ai/product/ready">dedicated product</a> team.
+          <span>
+            - Involved with the development/release life cycle of one of the
+            company's main products
+          </span>
+          <span>
+            - Back-end API development with tools like Python, Flask and Celery
+          </span>
+          <span>
+            - Built integrations with third-party providers through APIs
+          </span>
+          <span>
+            - Worked in an agile environment (sprints, code review, sub-tasking,
+            CI/CD...)
+          </span>
         </ExperienceItem>
         <ExperienceItem
           from="Feb 2021"
@@ -23,8 +34,13 @@ export const Experience = () => {
           position="Software Engineer"
           tools={["Django", "JavaScript", "Pytest", "Heroku", "AWS"]}
         >
-          Built a mobile-ready web app for managing internal resources,
-          inventory statistics, projections, notifications and PDF reports.
+          <span>
+            - Built a mobile-ready web app for managing the company's internal
+            resources
+          </span>
+          <span>- Lead both back-end and front-end development from scratch</span>
+          <span>- Data analysis and statistics dashboard</span>
+          <span>- Setup of CI, documentation and deployment</span>
         </ExperienceItem>
         <ExperienceItem
           from="Jun 2020"
@@ -33,9 +49,13 @@ export const Experience = () => {
           position="Freelancer"
           tools={["Python", "Django", "Selenium", "Heroku"]}
         >
-          Provided my web dev services and automated data scraping scripts.
-          Freelance job, so I worked with multiple clients across the world (fun
-          fact: I also worked as a video editor).
+          <span>
+            - Provided my software developer services to multiple clients over
+            the world
+          </span>
+          <span>- Automation of data scraping & data cleansing scripts</span>
+          <span>- Development of websites with Django and Flask</span>
+          <span>- Fun fact: I also worked as a freelance video editor</span>
         </ExperienceItem>
         <ExperienceItem
           from="Feb 2019"
@@ -44,8 +64,16 @@ export const Experience = () => {
           position="Software Engineer"
           tools={["Python", "Flask", "JavaScript", "React"]}
         >
-          Maintenance of websites with Flask and JavaScript. Also learned a lot
-          of Python and React through in-house training, mentorship and courses.
+          <span>
+            - Added full-stack features to websites with Flask and JavaScript
+          </span>
+          <span>
+            - Involved in open source development, bootcamps and campaigns
+          </span>
+          <span>
+            - Learned a lot of Python and React through in-house training,
+            mentorship and courses
+          </span>
         </ExperienceItem>
         <ExperienceItem
           from="May 2018"
@@ -54,9 +82,12 @@ export const Experience = () => {
           position="Intern"
           tools={["Python", "Django"]}
         >
-          I worked on a web app that generated optimized driving routes across
-          several waypoints using the Google Maps API, which helped to save gas
-          and time.
+          <span>
+            - Worked on a web app that generated optimized driving routes across
+            several waypoints
+          </span>
+          <span>- Usage the Google Maps API with Python</span>
+          <span>- Helped to save gas and time</span>
         </ExperienceItem>
       </ul>
     </div>
