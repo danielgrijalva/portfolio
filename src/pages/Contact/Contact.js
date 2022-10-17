@@ -22,7 +22,11 @@ export const Contact = () => {
         >
           LinkedIn
         </a>
-        <a className={classes.resume} href="#">
+        <a
+          className={classes.resume}
+          target="_blank"
+          href="https://drive.google.com/file/d/1hQNsjz87XBJcDhrR1yqpKknNc_Q_vXHM/view?usp=sharing"
+        >
           Download resume
         </a>
       </div>
