@@ -1,0 +1,43 @@
+---
+interface Props {
+  id: string;
+  title?: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<section class="page" id={id} data-section>
+  <div class="content">
+    {title && <h1 class="title">{title}</h1>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+
+  /*
+    Each section is at least one screen tall and grows with its content,
+    so nothing is ever clipped. On desktop the fixed nav takes the left 18rem,
+    so content is centered in the space to its right.
+  */
+  .page {
+    @apply flex min-h-svh items-center bg-zinc-800;
+    @apply px-5 pt-24 pb-16 sm:px-8 lg:py-24 lg:pr-12 lg:pl-80 xl:pr-20 xl:pl-[22rem];
+    transition: background-color 0.4s ease;
+  }
+
+  .page:global(.active) {
+    @apply bg-zinc-900;
+  }
+
+  .content {
+    @apply mx-auto w-full max-w-5xl;
+  }
+
+  /* On desktop the nav already names the section. */
+  .title {
+    @apply mb-8 font-poppins text-3xl font-medium text-balance lg:hidden;
+  }
+</style>

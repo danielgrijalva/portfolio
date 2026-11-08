@@ -1,276 +1,522 @@
 ---
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Section from "../components/Section.astro";
 import Photo from "../components/Photo.astro";
-import { details, photos } from "../lib/photos";
-import avatar from "../assets/images/avatar.webp";
+import { photos } from "../lib/photos";
 
-const featured = photos.slice(0, 6);
+import a3 from "../assets/images/a3.webp";
+import avatarLarge from "../assets/images/avatar-lg.webp";
+import datasets from "../assets/images/datasets.webp";
+import ghostwriter from "../assets/images/ghostwriter.webp";
+import overworld from "../assets/images/overworld.webp";
+import portfolio from "../assets/images/portfolio.webp";
+import scrapers from "../assets/images/scrapers.webp";
+
+import MXIcon from "../assets/icons/MX.svg";
+
+const EMAIL = "danielgrisoto@gmail.com";
+const PASSIONS = ["film photography", "music", "Python", "making things", "data"];
+
+const featuredProject = {
+  title: "BeeMaps",
+  link: "https://beemaps.com.mx",
+  description:
+    "A real-estate platform for brokers and buyers in north-west México. I built it and I run it: started in August 2024, live since April 2025.",
+};
 
 const projects = [
-  {
-    title: "BeeMaps",
-    link: "https://beemaps.com.mx",
-    description: "A real-estate platform for brokers and buyers in north-west México. I built it and I run it.",
-  },
   {
     title: "Overworld",
     link: "https://github.com/danielgrijalva/overworld",
     description: "A site for keeping track of the games I've played. Currently rebuilding it from scratch.",
-  },
-  {
-    title: "Ghostwriter",
-    link: "https://github.com/danielgrijalva/ghostwriter",
-    description: "An experiment in AI-assisted writing, built with Keras and Vue.",
+    image: overworld,
+    tools: ["Django", "React", "Redux"],
   },
   {
     title: "Sistema A3",
     link: "https://www.sistemaa3.com/propiedades/venta",
     description: "The property system I built for a real-estate company, front to back.",
+    image: a3,
+    tools: ["Django", "JavaScript", "AWS S3"],
+  },
+  {
+    title: "Ghostwriter",
+    link: "https://github.com/danielgrijalva/ghostwriter",
+    description: "An experiment in AI-assisted writing.",
+    image: ghostwriter,
+    tools: ["Python", "Keras", "Vue.js"],
   },
   {
     title: "Datasets",
     link: "https://www.kaggle.com/danielgrijalvas",
     description: "Datasets I've put together on Kaggle to answer questions I was curious about.",
+    image: datasets,
+    tools: ["Python", "Pandas"],
   },
   {
     title: "Scrapers",
     link: "https://github.com/danielgrijalva/infocasas",
     description: "A pile of web scrapers, mostly for freelance clients.",
+    image: scrapers,
+    tools: ["Python", "Selenium", "BeautifulSoup"],
+  },
+  {
+    title: "This website",
+    link: "https://github.com/danielgrijalva/portfolio",
+    description: "The page you're on, plus the photo pipeline behind it.",
+    image: portfolio,
+    tools: ["Astro", "Tailwind", "Cloudflare R2"],
   },
 ];
 
 const work = [
-  { years: "2024–now", place: "BeeMaps", what: "Founder. Started Aug 2024, live since Apr 2025" },
-  { years: "2022–now", place: "Improving", what: "Consulting: platforms, AWS/Terraform, AI and vision pipelines" },
-  { years: "2022", place: "Turn Technologies", what: "Backend APIs and third-party integrations" },
-  { years: "2021", place: "A Terceros", what: "Built their internal web app from scratch" },
-  { years: "2020", place: "Freelance", what: "Scrapers, data cleanup, Django sites, some video editing" },
-  { years: "2019", place: "Nearsoft", what: "Full-stack features in Flask and React" },
-  { years: "2018", place: "Prodigia", what: "Route optimisation with the Google Maps API" },
+  { years: "2024 – now", place: "BeeMaps", what: "Founder. Started Aug 2024, live since Apr 2025." },
+  { years: "2022 – now", place: "Improving", what: "Consulting: platforms, AWS and Terraform, AI and vision pipelines." },
+  { years: "2022", place: "Turn Technologies", what: "Backend APIs and third-party integrations." },
+  { years: "2021", place: "A Terceros", what: "Built their internal web app from scratch." },
+  { years: "2020", place: "Freelance", what: "Scrapers, data cleanup, Django sites, some video editing." },
+  { years: "2019", place: "Nearsoft", what: "Full-stack features in Flask and React." },
+  { years: "2018", place: "Prodigia", what: "Route optimisation with the Google Maps API." },
 ];
 
-const elsewhere = [
-  { label: "Email", href: "mailto:danielgrisoto@gmail.com" },
-  { label: "GitHub", href: "https://github.com/danielgrijalva" },
-  { label: "Kaggle", href: "https://www.kaggle.com/danielgrijalvas" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/danielgrijalva/" },
-  { label: "Last.fm", href: "https://www.last.fm/user/jdgsgt" },
-];
+const featured = photos.slice(0, 6);
 ---
 
 <Base>
+  <Nav />
   <main>
-    <header class="intro">
-      <div class="name">
-        <Image src={avatar} alt="" width={80} height={80} loading="eager" class="avatar" />
-        <div>
-          <h1>Daniel Grijalva</h1>
-          <p class="role">Software engineer &amp; film photographer</p>
-        </div>
+    <Section id="hello">
+      <div class="hello">
+        <h1>
+          Hello. I am Daniel, a software engineer who loves{" "}
+          <span class="highlight" data-passions={JSON.stringify(PASSIONS)}
+            ><span class="word">{PASSIONS[0]}</span><span class="dot">.</span></span
+          >
+        </h1>
+        <p class="sub">
+          I live in México. By day I consult at Improving; the rest of the time I run BeeMaps, shoot film and listen to
+          too much music.
+        </p>
       </div>
-      <p>
-        I'm Daniel, a software engineer in México. These days I'm a consultant at Improving, building web services and
-        platforms for large customers, mostly in Python on AWS, lately with a lot of AI and vision pipelines.
-        I also run <a class="link" href="https://beemaps.com.mx">BeeMaps</a>, a real-estate platform for brokers and
-        buyers in north-west México.
-      </p>
-      <p>
-        Outside of work I shoot film, mostly on a Minolta SRT 101, and I listen to a lot of music. The photographs
-        below are mine.
-      </p>
-    </header>
+    </Section>
 
-    <section id="photography" class="photos-section" aria-labelledby="photography-title">
-      <h2 id="photography-title">Photographs</h2>
-      {
-        featured.length > 0 ? (
-          <div class="frames">
-            {featured.map((photo, i) => (
-              <figure>
-                <a href="/photos" style={`aspect-ratio: ${photo.width} / ${photo.height}`}>
-                  <Photo photo={photo} sizes="(min-width: 960px) 440px, (min-width: 640px) 45vw, 100vw" eager={i < 2} />
+    <Section id="photography" title="Photography">
+      <div class="photography">
+        {
+          featured.length > 0 ? (
+            <div class="photo-strip">
+              {featured.map((photo) => (
+                <a href="/photos" class="photo-tile">
+                  <Photo photo={photo} sizes="(min-width: 768px) 22vw, 45vw" />
                 </a>
-                {details(photo) && <figcaption class="meta">{details(photo)}</figcaption>}
-              </figure>
-            ))}
-          </div>
-        ) : (
-          <p class="muted">Photos coming soon.</p>
-        )
-      }
-      <p><a class="link" href="/photos">More on the photos page →</a></p>
-    </section>
+              ))}
+            </div>
+          ) : (
+            <p class="empty">The first roll is still in the developing tank. Check back soon.</p>
+          )
+        }
+        <p class="photo-note">Shot on film, mostly with a Minolta SRT 101.</p>
+        <a href="/photos" class="see-all">
+          See all photos
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 10h12m-5-5 5 5-5 5"></path>
+          </svg>
+        </a>
+      </div>
+    </Section>
 
-    <section aria-labelledby="made-title">
-      <h2 id="made-title">Things I've made</h2>
-      <ul class="rows">
+    <Section id="projects" title="Things I've made">
+      <div class="projects">
+        <div class="card card-hover project featured">
+          <a href={featuredProject.link} target="_blank" rel="noopener" class="project-title">
+            {featuredProject.title}
+          </a>
+          <p class="description">{featuredProject.description}</p>
+          <span class="visit">beemaps.com.mx</span>
+        </div>
         {
           projects.map((p) => (
-            <li>
-              <a class="row-title link" href={p.link} target="_blank" rel="noopener">
+            <div class="card card-hover project">
+              <Image
+                src={p.image}
+                alt=""
+                class="banner"
+                widths={[320, 640]}
+                sizes="(min-width: 1280px) 300px, (min-width: 640px) 45vw, 90vw"
+              />
+              <a href={p.link} target="_blank" rel="noopener" class="project-title">
                 {p.title}
               </a>
-              <span class="muted">{p.description}</span>
-            </li>
+              <p class="description">{p.description}</p>
+              <div class="tool-list">
+                {p.tools.map((t) => (
+                  <span>{t}</span>
+                ))}
+              </div>
+            </div>
           ))
         }
-      </ul>
-    </section>
+      </div>
+    </Section>
 
-    <section aria-labelledby="work-title">
-      <h2 id="work-title">Work</h2>
-      <ul class="rows work">
+    <Section id="work" title="Work">
+      <ul class="experience">
         {
           work.map((job) => (
-            <li>
-              <span class="meta years">{job.years}</span>
-              <span>
-                {job.place} <span class="muted">· {job.what}</span>
-              </span>
+            <li class="job">
+              <div class="separator">
+                <div class="bullet" />
+                <div class="line" />
+              </div>
+              <div class="info">
+                <h2 class="company">{job.place}</h2>
+                <p class="years">{job.years}</p>
+                <p class="what">{job.what}</p>
+              </div>
             </li>
           ))
         }
       </ul>
-    </section>
+    </Section>
 
-    <section aria-labelledby="elsewhere-title">
-      <h2 id="elsewhere-title">Elsewhere</h2>
-      <p class="elsewhere">
-        {
-          elsewhere.map(({ label, href }) => (
-            <a class="link" href={href} target={href.startsWith("mailto:") ? undefined : "_blank"} rel="noopener">
-              {label}
-            </a>
-          ))
-        }
-      </p>
-      <p class="muted">
-        The best way to reach me is email: <a class="link" href="mailto:danielgrisoto@gmail.com"
-          >danielgrisoto@gmail.com</a
-        >.
-      </p>
-    </section>
+    <Section id="me" title="About me">
+      <div class="me">
+        <div class="text">
+          <div class="name">My name is Daniel,</div>
+          <h2 class="pitch">I write software for a living and shoot film for fun.</h2>
+          <p class="bio">
+            These days I'm a consultant at Improving, building web services and platforms for large customers, mostly in
+            Python on AWS, lately with a lot of AI and vision pipelines. I also run{" "}
+            <a href="https://beemaps.com.mx" target="_blank" rel="noopener">BeeMaps</a>, a real-estate platform for
+            brokers and buyers in north-west México.
+          </p>
+          <p class="bio">
+            Outside of work I shoot film, mostly on a Minolta SRT 101, and I listen to a lot of music. The photographs
+            on this site are mine.
+          </p>
+          <div class="based">
+            based in
+            <div class="mx"><MXIcon /> México</div>
+          </div>
+        </div>
+        <Image
+          src={avatarLarge}
+          alt="Daniel Grijalva"
+          class="avatar"
+          widths={[224, 448]}
+          sizes="(min-width: 768px) 224px, 112px"
+        />
+      </div>
+    </Section>
 
-    <footer class="meta">
-      Built with Astro and hosted on Cloudflare. Photos shot on film, mostly with a Minolta SRT 101.
-    </footer>
+    <Section id="contact" title="Say hi">
+      <div class="contact">
+        <div class="card email">
+          <a href={`mailto:${EMAIL}`} class="email-text">
+            <span class="text-sm text-zinc-400">The best way to reach me is email</span>
+            <span class="address">{EMAIL}</span>
+          </a>
+          <button class="copy" type="button" data-email={EMAIL} aria-label="Copy email address">
+            <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path stroke-linecap="round" d="M5 15V6a2 2 0 0 1 2-2h9"></path>
+            </svg>
+            <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"></path>
+            </svg>
+          </button>
+          <span class="copied" role="status" aria-live="polite"></span>
+        </div>
+        <div class="buttons">
+          <a class="linkedin" href="https://www.linkedin.com/in/danielgrijalva/" target="_blank" rel="noopener"
+            >LinkedIn</a
+          >
+          <a class="github" href="https://github.com/danielgrijalva" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <p class="elsewhere">
+          I'm also on{" "}<a href="https://www.kaggle.com/danielgrijalvas" target="_blank" rel="noopener">Kaggle</a>, and{" "}
+          <a href="https://www.last.fm/user/jdgsgt" target="_blank" rel="noopener">Last.fm</a> has what I've been listening to.
+        </p>
+      </div>
+    </Section>
   </main>
 </Base>
 
-<style>
-  /* 38rem of text, plus the 1.25rem gutters. */
-  main {
-    max-width: 40.5rem;
-    margin: 0 auto;
-    padding: 6rem 1.25rem 4rem;
+<script>
+  // Cycle through the words after "who loves", fading between them.
+  const highlight = document.querySelector<HTMLElement>("[data-passions]")!;
+  const word = highlight.querySelector<HTMLElement>(".word")!;
+  const passions: string[] = JSON.parse(highlight.dataset.passions!);
+  let i = 0;
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setInterval(() => {
+      highlight.classList.add("fading");
+      setTimeout(() => {
+        i = (i + 1) % passions.length;
+        word.textContent = passions[i];
+        highlight.classList.remove("fading");
+      }, 300);
+    }, 2300);
   }
 
-  section,
-  footer {
-    margin-top: 5.5rem;
-  }
-
-  h1,
-  h2 {
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
-  h2 {
-    margin-bottom: 1rem;
-  }
-
-  .muted,
-  .role {
-    color: var(--muted);
-  }
-
-  /* Intro */
-  .name {
-    display: flex;
-    align-items: center;
-    gap: 0.875rem;
-    margin-bottom: 2rem;
-  }
-  .name :global(.avatar) {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 9999px;
-    object-fit: cover;
-  }
-  .intro p + p {
-    margin-top: 1rem;
-  }
-
-  /* Photographs: allowed to break out wider than the text column. */
-  .photos-section {
-    width: min(56rem, calc(100vw - 2.5rem));
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-  .photos-section > h2,
-  .photos-section > p {
-    max-width: 38rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .frames {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem 1.25rem;
-    align-items: start;
-    margin-bottom: 1.75rem;
-  }
-  @media (min-width: 640px) {
-    .frames {
-      grid-template-columns: 1fr 1fr;
+  // Copy the email address, with a short confirmation.
+  const copy = document.querySelector<HTMLButtonElement>(".copy")!;
+  const status = document.querySelector<HTMLElement>(".copied")!;
+  let reset: number | undefined;
+  copy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(copy.dataset.email!);
+      copy.classList.add("done");
+      status.textContent = "Copied";
+    } catch {
+      status.textContent = "Couldn't copy. Select the address instead.";
     }
+    clearTimeout(reset);
+    reset = window.setTimeout(() => {
+      copy.classList.remove("done");
+      status.textContent = "";
+    }, 1800);
+  });
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Hello */
+  .hello h1 {
+    @apply max-w-3xl font-poppins text-4xl leading-tight font-medium text-balance md:text-6xl md:leading-[1.1];
+    letter-spacing: -0.02em;
   }
-  figure a {
-    display: block;
-    background: var(--photo-bg);
+  .highlight {
+    @apply text-pink-300 transition-opacity duration-300;
   }
-  figure :global(img) {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .highlight.fading {
+    @apply opacity-0;
   }
-  figcaption {
-    margin-top: 0.5rem;
+  .dot {
+    @apply text-white;
+  }
+  .sub {
+    @apply mt-8 max-w-xl font-poppins text-lg font-light text-pretty text-zinc-400 md:text-xl;
   }
 
-  /* Lists */
-  .rows {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.875rem;
+  /* Photography */
+  .photo-strip {
+    @apply grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4;
   }
-  .rows li {
-    display: flex;
-    flex-direction: column;
+  .photo-tile {
+    @apply block aspect-[4/5] overflow-hidden rounded-lg bg-zinc-800;
   }
-  .row-title {
-    width: fit-content;
+  .photo-tile :global(img) {
+    @apply h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.03];
   }
-  .work li {
-    flex-direction: row;
-    gap: 1rem;
+  .empty {
+    @apply max-w-xl font-poppins text-2xl leading-snug font-light text-balance text-zinc-200 md:text-3xl;
+  }
+  .photo-note {
+    @apply mt-4 font-poppins text-sm font-light text-zinc-400;
+  }
+  .see-all {
+    @apply mt-8 inline-flex items-center gap-2 rounded-full border-2 border-zinc-500 px-6 py-2.5 font-poppins transition-colors hover:border-white;
+  }
+  .see-all svg {
+    @apply h-4 w-4 transition-transform duration-200 ease-out;
+  }
+  .see-all:hover svg {
+    @apply translate-x-0.5;
+  }
+
+  /* Projects */
+  .projects {
+    @apply grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3;
+  }
+  .project {
+    @apply relative flex flex-col p-5 md:p-6;
+  }
+  .project :global(.banner) {
+    @apply mb-5 aspect-video w-full rounded-lg object-cover;
+  }
+  .project-title {
+    @apply font-poppins text-lg leading-snug font-semibold;
+  }
+  /* Makes the whole card clickable. */
+  .project-title::before {
+    @apply absolute inset-0 rounded-xl;
+    content: "";
+  }
+  .description {
+    @apply mt-1 mb-5 grow text-zinc-300;
+  }
+  .featured {
+    @apply sm:col-span-2 md:p-8 xl:col-span-3;
+  }
+  .featured .project-title {
+    @apply text-2xl md:text-3xl;
+  }
+  .featured .description {
+    @apply max-w-2xl text-lg;
+  }
+  .visit {
+    @apply w-fit rounded-md bg-pink-300 px-2 py-1 text-xs font-medium text-zinc-900;
+  }
+
+  /* Work */
+  .experience {
+    @apply max-w-3xl;
+  }
+  .job {
+    @apply flex gap-5 md:gap-8;
+  }
+  .separator {
+    @apply flex flex-col items-center pt-1.5;
+  }
+  .bullet {
+    @apply h-3 w-3 shrink-0 rounded-full bg-pink-400;
+    box-shadow: 0 0 0 6px #f9a8d440;
+  }
+  .line {
+    @apply mt-4 w-px flex-1 bg-zinc-600;
+  }
+  .job:last-child .line {
+    @apply bg-transparent;
+  }
+  .info {
+    @apply min-w-0 pb-9;
+  }
+  .job:last-child .info {
+    @apply pb-0;
+  }
+  .company {
+    @apply font-poppins text-xl leading-tight font-medium;
   }
   .years {
-    flex: none;
-    width: 4.75rem;
-    padding-top: 0.2rem;
+    @apply mt-1 text-sm text-zinc-400 tabular-nums;
+  }
+  .what {
+    @apply mt-2 max-w-[65ch] text-zinc-300;
   }
 
+  /* About me */
+  .me {
+    @apply flex max-w-4xl flex-col-reverse items-start gap-6 md:flex-row md:items-center md:gap-12;
+  }
+  .text {
+    @apply flex-1 font-poppins font-light;
+  }
+  .name {
+    @apply mb-1 text-sm text-zinc-400 md:text-base;
+  }
+  .pitch {
+    @apply mb-4 text-2xl leading-tight font-semibold text-balance md:text-3xl;
+  }
+  .bio {
+    @apply max-w-[65ch] text-base leading-relaxed text-zinc-200;
+  }
+  .bio + .bio {
+    @apply mt-3;
+  }
+  .bio a,
+  .elsewhere a {
+    @apply text-pink-300 underline decoration-pink-300/40 underline-offset-4 transition-colors hover:decoration-pink-300;
+  }
+  .based {
+    @apply mt-8 flex items-center gap-3 text-zinc-400 md:text-lg;
+  }
+  .mx {
+    @apply inline-flex items-center gap-2 rounded-xl border-2 border-zinc-500 px-3 py-1.5 text-white;
+  }
+  .mx :global(svg) {
+    @apply h-auto w-5;
+  }
+  .me :global(.avatar) {
+    @apply w-28 flex-none rounded-full md:w-56;
+  }
+
+  /* Contact */
+  .contact {
+    @apply flex w-full max-w-md flex-col gap-5;
+  }
+  .email {
+    @apply relative flex items-center justify-between gap-4 p-5 sm:p-6;
+  }
+  .email-text {
+    @apply flex min-w-0 flex-col;
+  }
+  .address {
+    @apply truncate text-lg transition-colors sm:text-xl;
+  }
+  .email-text:hover .address {
+    @apply text-pink-300;
+  }
+  .copy {
+    @apply relative grid h-12 w-12 shrink-0 cursor-pointer place-items-center rounded-full bg-zinc-600 transition-colors hover:bg-zinc-500;
+    box-shadow:
+      0 0 0 4px #71717a60,
+      0 0 0 8px #71717a30;
+  }
+  .copy svg {
+    @apply col-start-1 row-start-1 h-5 w-5;
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .icon-check {
+    @apply scale-50 opacity-0;
+  }
+  .copy.done {
+    @apply bg-pink-300 text-zinc-900;
+  }
+  .copy.done .icon-copy {
+    @apply scale-50 opacity-0;
+  }
+  .copy.done .icon-check {
+    @apply scale-100 opacity-100;
+  }
+  .copied {
+    @apply absolute right-5 -bottom-7 text-sm text-pink-300 sm:right-6;
+  }
+  .buttons {
+    @apply mt-2 grid grid-cols-2 gap-4;
+  }
+  .buttons a {
+    @apply rounded-full px-3 py-3 text-center font-poppins text-sm whitespace-nowrap sm:text-base;
+    transition:
+      box-shadow 0.15s ease-out,
+      transform 0.1s ease-out;
+  }
+  .buttons a:active {
+    transform: scale(0.97);
+  }
+  .linkedin {
+    background-color: #0e76a8;
+    box-shadow: 0 0 0 4px #0e76a860;
+  }
+  .linkedin:hover {
+    box-shadow:
+      0 0 0 4px #0e76a860,
+      0 0 0 8px #0e76a830,
+      0 0 0 12px #0e76a815;
+  }
+  .github {
+    @apply bg-pink-500;
+    box-shadow: 0 0 0 4px #ec489960;
+  }
+  .github:hover {
+    box-shadow:
+      0 0 0 4px #ec489960,
+      0 0 0 8px #ec489930,
+      0 0 0 12px #ec489915;
+  }
   .elsewhere {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
-    margin-bottom: 1rem;
+    @apply font-poppins text-sm font-light text-zinc-400;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .copy svg {
+      transition: none;
+    }
   }
 </style>

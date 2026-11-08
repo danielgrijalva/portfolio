@@ -4,37 +4,34 @@ import PhotoGrid from "../components/PhotoGrid.astro";
 import { photos } from "../lib/photos";
 ---
 
-<Base title="Photographs - Daniel Grijalva" description="Film photographs by Daniel Grijalva.">
+<Base title="Photography - Daniel Grijalva" description="Photography by Daniel Grijalva">
   <div class="wrap">
     <header>
-      <a href="/" class="link back">← Daniel Grijalva</a>
-      <h1>Photographs</h1>
+      <a href="/#photography" class="back">← Daniel Grijalva</a>
+      <h1>Photography</h1>
       <p>Shot on film, mostly with a Minolta SRT 101.</p>
     </header>
-    {photos.length > 0 ? <PhotoGrid photos={photos} /> : <p class="empty">Photos coming soon.</p>}
+    {photos.length > 0 ? <PhotoGrid photos={photos} /> : <p class="empty">The first roll is still in the developing tank. Check back soon.</p>}
   </div>
 </Base>
 
 <style>
+  @reference "../styles/global.css";
+
   .wrap {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 4rem 1.25rem 5rem;
+    @apply mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-20;
   }
   header {
-    max-width: 38rem;
-    margin-bottom: 3rem;
+    @apply mb-10 font-poppins;
   }
   .back {
-    font-size: 0.875rem;
+    @apply text-sm text-zinc-400 transition-colors hover:text-white;
   }
   h1 {
-    margin-top: 2.5rem;
-    font-size: 1rem;
-    font-weight: 500;
+    @apply mt-6 text-4xl font-medium md:text-6xl;
   }
   header p,
   .empty {
-    color: var(--muted);
+    @apply mt-2 font-light text-zinc-400;
   }
 </style>
