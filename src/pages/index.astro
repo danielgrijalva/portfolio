@@ -1,0 +1,533 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Section from "../components/Section.astro";
+import Photo from "../components/Photo.astro";
+import { photos } from "../lib/photos";
+
+import a3 from "../assets/images/a3.webp";
+import avatarLarge from "../assets/images/avatar-lg.webp";
+import datasets from "../assets/images/datasets.webp";
+import ghostwriter from "../assets/images/ghostwriter.webp";
+import overworld from "../assets/images/overworld.webp";
+import portfolio from "../assets/images/portfolio.webp";
+import scrapers from "../assets/images/scrapers.webp";
+
+import AWSIcon from "../assets/icons/aws.svg";
+import CSSIcon from "../assets/icons/css.svg";
+import DjangoIcon from "../assets/icons/django.svg";
+import GitIcon from "../assets/icons/git.svg";
+import HerokuIcon from "../assets/icons/heroku.svg";
+import HTMLIcon from "../assets/icons/html.svg";
+import JavaScriptIcon from "../assets/icons/js.svg";
+import MXIcon from "../assets/icons/MX.svg";
+import PythonIcon from "../assets/icons/python.svg";
+import ReactIcon from "../assets/icons/react.svg";
+
+const PASSIONS = ["Python", "UX/UI", "photography", "data", "music"];
+
+const projects = [
+  {
+    title: "Portfolio",
+    description: "This website!",
+    image: portfolio,
+    link: "https://github.com/danielgrijalva/portfolio",
+    tools: ["Astro", "TailwindCSS", "Cloudflare"],
+  },
+  {
+    title: "Sistema A3",
+    description: "An ERP web application for a real estate company",
+    image: a3,
+    link: "https://www.sistemaa3.com/propiedades/venta",
+    tools: ["Django", "JavaScript", "AWS S3", "Heroku"],
+  },
+  {
+    title: "Overworld",
+    description: "A gaming tool to track your played games",
+    image: overworld,
+    link: "https://github.com/danielgrijalva/overworld",
+    tools: ["Django", "ReactJS", "Redux", "Heroku"],
+  },
+  {
+    title: "Web scraping",
+    description: "I've build several web scrapers for many clients",
+    image: scrapers,
+    link: "https://github.com/danielgrijalva/infocasas",
+    tools: ["Python", "Selenium", "BeautifulSoup"],
+  },
+  {
+    title: "Ghostwriter",
+    description: "An AI tool for writers",
+    image: ghostwriter,
+    link: "https://github.com/danielgrijalva/ghostwriter",
+    tools: ["Python", "Keras", "Vue.js"],
+  },
+  {
+    title: "Datasets",
+    description: "I like to build datasets and answer questions with data",
+    image: datasets,
+    link: "https://www.kaggle.com/danielgrijalvas",
+    tools: ["Python", "Pandas"],
+  },
+];
+
+const experience = [
+  {
+    from: "May 2022",
+    to: "Oct 2022",
+    company: "Turn Technologies",
+    tools: ["Python", "Flask", "Celery", "APIs", "Docker", "PostgreSQL"],
+    points: [
+      "Involved with the development/release life cycle of one of the company's main products",
+      "Back-end API development with tools like Python, Flask and Celery",
+      "Built integrations with third-party providers through APIs",
+      "Worked in an agile environment (sprints, code review, sub-tasking, CI/CD...)",
+    ],
+  },
+  {
+    from: "Feb 2021",
+    to: "Feb 2022",
+    company: "A Terceros",
+    tools: ["Django", "JavaScript", "Pytest", "Heroku", "AWS"],
+    points: [
+      "Built a mobile-ready web app for managing the company's internal resources",
+      "Lead both back-end and front-end development from scratch",
+      "Data analysis and statistics dashboard",
+      "Setup of CI, documentation and deployment",
+    ],
+  },
+  {
+    from: "Jun 2020",
+    to: "Jun 2021",
+    company: "Upwork",
+    tools: ["Python", "Django", "Selenium", "Heroku"],
+    points: [
+      "Provided my software developer services to multiple clients over the world",
+      "Automation of data scraping & data cleansing scripts",
+      "Development of websites with Django and Flask",
+      "Fun fact: I also worked as a freelance video editor",
+    ],
+  },
+  {
+    from: "Feb 2019",
+    to: "Apr 2020",
+    company: "Nearsoft",
+    tools: ["Python", "Flask", "JavaScript", "React"],
+    points: [
+      "Added full-stack features to websites with Flask and JavaScript",
+      "Involved in open source development, bootcamps and campaigns",
+      "Learned a lot of Python and React through in-house training, mentorship and courses",
+    ],
+  },
+  {
+    from: "May 2018",
+    to: "Aug 2018",
+    company: "Prodigia",
+    tools: ["Python", "Django"],
+    points: [
+      "Worked on a web app that generated optimized driving routes across several waypoints",
+      "Usage the Google Maps API with Python",
+      "Helped to save gas and time",
+    ],
+  },
+];
+
+const tools = [
+  { name: "Python", Icon: PythonIcon },
+  { name: "JavaScript", Icon: JavaScriptIcon },
+  { name: "React", Icon: ReactIcon },
+  { name: "Django", Icon: DjangoIcon },
+  { name: "Git", Icon: GitIcon },
+  { name: "HTML", Icon: HTMLIcon },
+  { name: "CSS", Icon: CSSIcon },
+  { name: "Heroku", Icon: HerokuIcon },
+  { name: "AWS S3", Icon: AWSIcon },
+];
+
+const featured = photos.slice(0, 6);
+---
+
+<Base>
+  <Nav />
+  <main>
+    <Section id="hello">
+      <div class="hello">
+        <h1>
+          Hello. I am Daniel, a software engineer who loves{" "}
+          <span class="highlight" data-passions={JSON.stringify(PASSIONS)}
+            ><span class="word">{PASSIONS[0]}</span><span class="dot">.</span></span
+          >
+        </h1>
+      </div>
+    </Section>
+
+    <Section id="projects" title="My projects">
+      <div class="projects">
+        {
+          projects.map((p) => (
+            <div class="card card-hover project">
+              <Image
+                src={p.image}
+                alt=""
+                class="banner"
+                widths={[320, 640]}
+                sizes="(min-width: 1280px) 300px, (min-width: 640px) 45vw, 90vw"
+              />
+              <a href={p.link} target="_blank" rel="noopener" class="project-title">
+                {p.title}
+              </a>
+              <p class="description">{p.description}</p>
+              <div class="tool-list">
+                {p.tools.map((t) => (
+                  <span>{t}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Section>
+
+    <Section id="experience" title="Experience">
+      <ul class="experience">
+        {
+          experience.map((job) => (
+            <li class="job">
+              <div class="separator">
+                <div class="bullet" />
+                <div class="line" />
+              </div>
+              <div class="info">
+                <h2 class="company">{job.company}</h2>
+                <p class="years">
+                  {job.from} – {job.to}
+                </p>
+                <ul class="points">
+                  {job.points.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+                <div class="tool-list">
+                  {job.tools.map((t) => (
+                    <span>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <Section id="photography" title="Photography">
+      <div class="photography">
+        {
+          featured.length > 0 ? (
+            <div class="photo-strip">
+              {featured.map((photo) => (
+                <a href="/photos" class="photo-tile">
+                  <Photo photo={photo} sizes="(min-width: 768px) 22vw, 45vw" />
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p class="empty">Photos coming soon.</p>
+          )
+        }
+        <a href="/photos" class="see-all">
+          See all photos
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 10h12m-5-5 5 5-5 5"></path>
+          </svg>
+        </a>
+      </div>
+    </Section>
+
+    <Section id="tools" title="My skillset">
+      <div class="tools">
+        {
+          tools.map(({ name, Icon }) => (
+            <div class="card tool">
+              <Icon />
+              {name}
+            </div>
+          ))
+        }
+      </div>
+    </Section>
+
+    <Section id="me" title="About me">
+      <div class="me">
+        <div class="text">
+          <div class="name">My name is Daniel,</div>
+          <h2 class="pitch">A software engineer with 3+ years of professional experience.</h2>
+          <p class="bio">
+            I'm a driven person who has extensive Python experience, skilled in software development and
+            knowledgeable in a wide range of tools and technologies. I am able to effectively manage my time while
+            working on my own projects, as well as collaborate with others to form a successful team. I'm
+            enthusiastic about UI/UX, front-end technologies and data science. <br />
+            Oh and I'm also <em>very</em> into music and analog photography.
+          </p>
+          <div class="based">
+            based in
+            <div class="mx"><MXIcon /> México</div>
+          </div>
+        </div>
+        <Image
+          src={avatarLarge}
+          alt="Daniel Grijalva"
+          class="avatar"
+          widths={[224, 448]}
+          sizes="(min-width: 768px) 224px, 112px"
+        />
+      </div>
+    </Section>
+
+    <Section id="contact" title="Contact me">
+      <div class="contact">
+        <a href="mailto:danielgrisoto@gmail.com" class="card card-hover email">
+          <span class="email-text">
+            <span class="text-sm text-zinc-400">Let's get in touch!</span>
+            <span class="address">danielgrisoto@gmail.com</span>
+          </span>
+          <span class="mail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </span>
+        </a>
+        <div class="buttons">
+          <a class="linkedin" href="https://www.linkedin.com/in/danielgrijalva/" target="_blank" rel="noopener"
+            >LinkedIn</a
+          >
+          <a
+            class="resume"
+            target="_blank"
+            rel="noopener"
+            href="https://drive.google.com/file/d/1hQNsjz87XBJcDhrR1yqpKknNc_Q_vXHM/view?usp=sharing">Download resume</a
+          >
+        </div>
+      </div>
+    </Section>
+  </main>
+</Base>
+
+<script>
+  // Cycle through the words after "who loves", fading between them.
+  const highlight = document.querySelector<HTMLElement>("[data-passions]")!;
+  const word = highlight.querySelector<HTMLElement>(".word")!;
+  const passions: string[] = JSON.parse(highlight.dataset.passions!);
+  let i = 0;
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setInterval(() => {
+      highlight.classList.add("fading");
+      setTimeout(() => {
+        i = (i + 1) % passions.length;
+        word.textContent = passions[i];
+        highlight.classList.remove("fading");
+      }, 300);
+    }, 2300);
+  }
+</script>
+
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Hello */
+  .hello h1 {
+    @apply max-w-3xl font-poppins text-4xl leading-tight font-medium text-balance md:text-6xl md:leading-[1.1];
+    letter-spacing: -0.02em;
+  }
+  .highlight {
+    @apply text-pink-300 transition-opacity duration-300;
+  }
+  .highlight.fading {
+    @apply opacity-0;
+  }
+  .dot {
+    @apply text-white;
+  }
+
+  /* Projects */
+  .projects {
+    @apply grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3;
+  }
+  .project {
+    @apply relative flex flex-col p-5 md:p-6;
+  }
+  .project :global(.banner) {
+    @apply mb-5 aspect-video w-full rounded-lg object-cover;
+  }
+  .project-title {
+    @apply font-poppins text-lg leading-snug font-semibold;
+  }
+  /* Makes the whole card clickable. */
+  .project-title::before {
+    @apply absolute inset-0 rounded-xl;
+    content: "";
+  }
+  .description {
+    @apply mt-1 mb-5 grow text-zinc-300;
+  }
+
+  /* Experience */
+  .experience {
+    @apply max-w-3xl;
+  }
+  .job {
+    @apply flex gap-5 md:gap-8;
+  }
+  .separator {
+    @apply flex flex-col items-center pt-1.5;
+  }
+  .bullet {
+    @apply h-3 w-3 shrink-0 rounded-full bg-pink-400;
+    box-shadow: 0 0 0 6px #f9a8d440;
+  }
+  .line {
+    @apply mt-4 w-px flex-1 bg-zinc-600;
+  }
+  .job:last-child .line {
+    @apply bg-transparent;
+  }
+  .info {
+    @apply min-w-0 pb-12;
+  }
+  .job:last-child .info {
+    @apply pb-0;
+  }
+  .company {
+    @apply font-poppins text-xl leading-tight font-medium;
+  }
+  .years {
+    @apply mt-1 text-sm text-zinc-400 tabular-nums;
+  }
+  .points {
+    @apply mt-3 mb-4 max-w-[65ch] list-disc space-y-1.5 pl-5 text-zinc-300 marker:text-zinc-500;
+  }
+
+  /* Photography */
+  .photo-strip {
+    @apply grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4;
+  }
+  .photo-tile {
+    @apply block aspect-[4/5] overflow-hidden rounded-lg bg-zinc-800;
+  }
+  .photo-tile :global(img) {
+    @apply h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.03];
+  }
+  .empty {
+    @apply text-zinc-400;
+  }
+  .see-all {
+    @apply mt-8 inline-flex items-center gap-2 rounded-full border-2 border-zinc-500 px-6 py-2.5 font-poppins transition-colors hover:border-white;
+  }
+  .see-all svg {
+    @apply h-4 w-4 transition-transform duration-200 ease-out;
+  }
+  .see-all:hover svg {
+    @apply translate-x-0.5;
+  }
+
+  /* Tools */
+  .tools {
+    @apply grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4;
+  }
+  .tool {
+    @apply flex items-center gap-3 px-4 py-4 font-poppins text-sm sm:text-base md:gap-4 md:px-5 md:py-5 md:text-lg;
+  }
+  .tool :global(svg) {
+    @apply h-7 w-7 shrink-0 md:h-10 md:w-10;
+  }
+
+  /* About me */
+  .me {
+    @apply flex max-w-4xl flex-col-reverse items-start gap-6 md:flex-row md:items-center md:gap-12;
+  }
+  .text {
+    @apply flex-1 font-poppins font-light;
+  }
+  .name {
+    @apply mb-1 text-sm text-zinc-400 md:text-base;
+  }
+  .pitch {
+    @apply mb-4 text-2xl leading-tight font-semibold text-balance md:text-3xl;
+  }
+  .bio {
+    @apply max-w-[65ch] text-base leading-relaxed text-zinc-200;
+  }
+  .based {
+    @apply mt-8 flex items-center gap-3 text-zinc-400 md:text-lg;
+  }
+  .mx {
+    @apply inline-flex items-center gap-2 rounded-xl border-2 border-zinc-500 px-3 py-1.5 text-white;
+  }
+  .mx :global(svg) {
+    @apply h-auto w-5;
+  }
+  .me :global(.avatar) {
+    @apply w-28 flex-none rounded-full md:w-56;
+  }
+
+  /* Contact */
+  .contact {
+    @apply flex w-full max-w-md flex-col gap-5;
+  }
+  .email {
+    @apply flex items-center justify-between gap-4 p-5 sm:p-6;
+  }
+  .email-text {
+    @apply flex min-w-0 flex-col;
+  }
+  .address {
+    @apply truncate text-lg sm:text-xl;
+  }
+  .mail-icon {
+    @apply shrink-0 rounded-full bg-zinc-500 p-3;
+    box-shadow:
+      0 0 0 4px #71717a60,
+      0 0 0 8px #71717a30;
+  }
+  .mail-icon svg {
+    @apply h-6 w-6;
+  }
+  .buttons {
+    @apply grid grid-cols-2 gap-4;
+  }
+  .buttons a {
+    @apply rounded-full px-3 py-3 text-center font-poppins text-sm whitespace-nowrap sm:text-base;
+    transition:
+      box-shadow 0.15s ease-out,
+      transform 0.1s ease-out;
+  }
+  .buttons a:active {
+    transform: scale(0.97);
+  }
+  .linkedin {
+    background-color: #0e76a8;
+    box-shadow: 0 0 0 4px #0e76a860;
+  }
+  .linkedin:hover {
+    box-shadow:
+      0 0 0 4px #0e76a860,
+      0 0 0 8px #0e76a830,
+      0 0 0 12px #0e76a815;
+  }
+  .resume {
+    @apply bg-pink-500;
+    box-shadow: 0 0 0 4px #ec489960;
+  }
+  .resume:hover {
+    box-shadow:
+      0 0 0 4px #ec489960,
+      0 0 0 8px #ec489930,
+      0 0 0 12px #ec489915;
+  }
+</style>
