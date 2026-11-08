@@ -29,3 +29,7 @@ export const srcset = (photo: Photo, ext: "avif" | "jpg") =>
   photo.widths.map((w) => `${photoUrl(photo, w, ext)} ${w}w`).join(", ");
 
 export const largest = (photo: Photo) => Math.max(...photo.widths);
+
+/** One-line caption: "Place · Portra 160 · Minolta SRT 101 · 2025". */
+export const details = (p: Photo) =>
+  [p.caption, p.film, p.camera, p.takenAt?.slice(0, 4)].filter(Boolean).join(" · ");

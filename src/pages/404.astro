@@ -3,8 +3,21 @@ import Base from "../layouts/Base.astro";
 ---
 
 <Base title="Not found - Daniel Grijalva">
-  <main class="flex h-screen flex-col items-center justify-center gap-4 font-poppins">
-    <h1 class="text-4xl font-medium">Nothing here.</h1>
-    <a href="/" class="text-zinc-400 transition-colors hover:text-white">← Back home</a>
+  <main>
+    <h1>Nothing here.</h1>
+    <a href="/" class="link">← Back home</a>
   </main>
 </Base>
+
+<style>
+  main {
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 6rem 1.25rem;
+  }
+  h1 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+</style>
