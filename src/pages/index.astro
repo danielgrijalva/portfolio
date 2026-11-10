@@ -70,15 +70,6 @@ const projects = [
   },
 ];
 
-const work = [
-  { years: "2024 – now", place: "BeeMaps", what: "Founder. Started Aug 2024, live since Apr 2025." },
-  { years: "2022 – now", place: "Improving", what: "Consulting: platforms, AWS and Terraform, AI and vision pipelines." },
-  { years: "2022", place: "Turn Technologies", what: "Backend APIs and third-party integrations." },
-  { years: "2021", place: "A Terceros", what: "Built their internal web app from scratch." },
-  { years: "2020", place: "Freelance", what: "Scrapers, data cleanup, Django sites, some video editing." },
-  { years: "2019", place: "Nearsoft", what: "Full-stack features in Flask and React." },
-  { years: "2018", place: "Prodigia", what: "Route optimisation with the Google Maps API." },
-];
 
 ---
 
@@ -118,6 +109,11 @@ const work = [
     </Section>
 
     <Section id="projects" title="Things I've made">
+      <p class="overview">
+        For a living I'm a consultant at Improving, building web services and platforms for large customers, mostly in
+        Python on AWS and lately with a lot of AI and vision pipelines. Before that I wrote backend APIs, built internal
+        tools from scratch and did a lot of freelance scraping and data work. On the side, I build things like these.
+      </p>
       <div class="projects">
         <div class="card card-hover project featured">
           <a href={featuredProject.link} target="_blank" rel="noopener" class="project-title">
@@ -151,34 +147,13 @@ const work = [
       </div>
     </Section>
 
-    <Section id="work" title="Work">
-      <ul class="experience">
-        {
-          work.map((job) => (
-            <li class="job">
-              <div class="separator">
-                <div class="bullet" />
-                <div class="line" />
-              </div>
-              <div class="info">
-                <h2 class="company">{job.place}</h2>
-                <p class="years">{job.years}</p>
-                <p class="what">{job.what}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </Section>
-
     <Section id="me" title="About me">
       <div class="me">
         <div class="text">
           <div class="name">My name is Daniel,</div>
           <h2 class="pitch">I write software for a living and shoot film for fun.</h2>
           <p class="bio">
-            These days I'm a consultant at Improving, building web services and platforms for large customers, mostly in
-            Python on AWS, lately with a lot of AI and vision pipelines. I also run{" "}
+            Besides my day job I run{" "}
             <a href="https://beemaps.com.mx" target="_blank" rel="noopener">BeeMaps</a>, a real-estate platform for
             brokers and buyers in north-west México.
           </p>
@@ -190,6 +165,32 @@ const work = [
             based in
             <div class="mx"><MXIcon /> México</div>
           </div>
+          <div class="contact">
+            <div class="card email">
+              <a href={`mailto:${EMAIL}`} class="email-text">
+                <span class="text-sm text-zinc-400">The best way to reach me is email</span>
+                <span class="address">{EMAIL}</span>
+              </a>
+              <button class="copy" type="button" data-email={EMAIL} aria-label="Copy email address">
+                <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+                  <path stroke-linecap="round" d="M5 15V6a2 2 0 0 1 2-2h9"></path>
+                </svg>
+                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"></path>
+                </svg>
+              </button>
+              <span class="copied" role="status" aria-live="polite"></span>
+            </div>
+            <div class="buttons">
+              <a class="github" href="https://github.com/danielgrijalva" target="_blank" rel="noopener">GitHub</a>
+              <a class="x" href="https://x.com/danieleerie" target="_blank" rel="noopener">X</a>
+            </div>
+            <p class="elsewhere">
+              I'm also on{" "}<a href="https://www.kaggle.com/danielgrijalvas" target="_blank" rel="noopener">Kaggle</a>, and{" "}
+              <a href="https://www.last.fm/user/jdgsgt" target="_blank" rel="noopener">Last.fm</a> has what I've been listening to.
+            </p>
+          </div>
         </div>
         <Image
           src={avatarLarge}
@@ -198,37 +199,6 @@ const work = [
           widths={[224, 448]}
           sizes="(min-width: 768px) 224px, 112px"
         />
-      </div>
-    </Section>
-
-    <Section id="contact" title="Say hi">
-      <div class="contact">
-        <div class="card email">
-          <a href={`mailto:${EMAIL}`} class="email-text">
-            <span class="text-sm text-zinc-400">The best way to reach me is email</span>
-            <span class="address">{EMAIL}</span>
-          </a>
-          <button class="copy" type="button" data-email={EMAIL} aria-label="Copy email address">
-            <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
-              <path stroke-linecap="round" d="M5 15V6a2 2 0 0 1 2-2h9"></path>
-            </svg>
-            <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"></path>
-            </svg>
-          </button>
-          <span class="copied" role="status" aria-live="polite"></span>
-        </div>
-        <div class="buttons">
-          <a class="linkedin" href="https://www.linkedin.com/in/danielgrijalva/" target="_blank" rel="noopener"
-            >LinkedIn</a
-          >
-          <a class="github" href="https://github.com/danielgrijalva" target="_blank" rel="noopener">GitHub</a>
-        </div>
-        <p class="elsewhere">
-          I'm also on{" "}<a href="https://www.kaggle.com/danielgrijalvas" target="_blank" rel="noopener">Kaggle</a>, and{" "}
-          <a href="https://www.last.fm/user/jdgsgt" target="_blank" rel="noopener">Last.fm</a> has what I've been listening to.
-        </p>
       </div>
     </Section>
   </main>
@@ -317,6 +287,9 @@ const work = [
   }
 
   /* Projects */
+  .overview {
+    @apply mb-10 max-w-[65ch] font-poppins text-lg leading-relaxed font-light text-pretty text-zinc-300;
+  }
   .projects {
     @apply grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3;
   }
@@ -348,42 +321,6 @@ const work = [
   }
   .visit {
     @apply w-fit rounded-md bg-pink-300 px-2 py-1 text-xs font-medium text-zinc-900;
-  }
-
-  /* Work */
-  .experience {
-    @apply max-w-3xl;
-  }
-  .job {
-    @apply flex gap-5 md:gap-8;
-  }
-  .separator {
-    @apply flex flex-col items-center pt-1.5;
-  }
-  .bullet {
-    @apply h-3 w-3 shrink-0 rounded-full bg-pink-400;
-    box-shadow: 0 0 0 6px #f9a8d440;
-  }
-  .line {
-    @apply mt-4 w-px flex-1 bg-zinc-600;
-  }
-  .job:last-child .line {
-    @apply bg-transparent;
-  }
-  .info {
-    @apply min-w-0 pb-9;
-  }
-  .job:last-child .info {
-    @apply pb-0;
-  }
-  .company {
-    @apply font-poppins text-xl leading-tight font-medium;
-  }
-  .years {
-    @apply mt-1 text-sm text-zinc-400 tabular-nums;
-  }
-  .what {
-    @apply mt-2 max-w-[65ch] text-zinc-300;
   }
 
   /* About me */
@@ -424,7 +361,7 @@ const work = [
 
   /* Contact */
   .contact {
-    @apply flex w-full max-w-md flex-col gap-5;
+    @apply mt-10 flex w-full max-w-md flex-col gap-5 font-normal;
   }
   .email {
     @apply relative flex items-center justify-between gap-4 p-5 sm:p-6;
@@ -477,16 +414,6 @@ const work = [
   .buttons a:active {
     transform: scale(0.97);
   }
-  .linkedin {
-    background-color: #0e76a8;
-    box-shadow: 0 0 0 4px #0e76a860;
-  }
-  .linkedin:hover {
-    box-shadow:
-      0 0 0 4px #0e76a860,
-      0 0 0 8px #0e76a830,
-      0 0 0 12px #0e76a815;
-  }
   .github {
     @apply bg-pink-500;
     box-shadow: 0 0 0 4px #ec489960;
@@ -496,6 +423,16 @@ const work = [
       0 0 0 4px #ec489960,
       0 0 0 8px #ec489930,
       0 0 0 12px #ec489915;
+  }
+  .x {
+    @apply bg-white text-zinc-900;
+    box-shadow: 0 0 0 4px #ffffff40;
+  }
+  .x:hover {
+    box-shadow:
+      0 0 0 4px #ffffff40,
+      0 0 0 8px #ffffff20,
+      0 0 0 12px #ffffff10;
   }
   .elsewhere {
     @apply font-poppins text-sm font-light text-zinc-400;
