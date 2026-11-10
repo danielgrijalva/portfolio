@@ -1,17 +1,53 @@
 ---
 import Base from "../layouts/Base.astro";
 import PhotoGrid from "../components/PhotoGrid.astro";
-import { photos } from "../lib/photos";
+import { PROFILE_URL, recentPhotos, type Photo } from "../lib/flickr";
+
+// Rendered on the Worker so it always shows what's currently on Flickr.
+export const prerender = false;
+
+let photos: Photo[] | undefined;
+try {
+  photos = await recentPhotos();
+} catch (error) {
+  console.error(error);
+}
+
+Astro.response.headers.set("Cache-Control", "public, max-age=300");
 ---
 
-<Base title="Photography - Daniel Grijalva" description="Photography by Daniel Grijalva">
+<Base title="Photography - Daniel Grijalva" description="Film photographs by Daniel Grijalva.">
   <div class="wrap">
     <header>
       <a href="/#photography" class="back">← Daniel Grijalva</a>
       <h1>Photography</h1>
-      <p>Shot on film, mostly with a Minolta SRT 101.</p>
+      <p>
+        Shot on film, mostly with a Minolta SRT 101. These are my latest uploads; the rest, sorted into albums, are on{" "}
+        <a href={PROFILE_URL} target="_blank" rel="noopener">Flickr</a>.
+      </p>
     </header>
-    {photos.length > 0 ? <PhotoGrid photos={photos} /> : <p class="empty">The first roll is still in the developing tank. Check back soon.</p>}
+    {
+      !photos ? (
+        <p class="note">
+          Couldn't reach Flickr just now. Try again in a minute, or see the photos{" "}
+          <a href={PROFILE_URL}>on Flickr</a>.
+        </p>
+      ) : photos.length ? (
+        <PhotoGrid photos={photos} />
+      ) : (
+        <p class="note">No photos yet.</p>
+      )
+    }
+    {
+      photos && photos.length > 0 && (
+        <a href={PROFILE_URL} class="more" target="_blank" rel="noopener">
+          See everything on Flickr
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 10h12m-5-5 5 5-5 5" />
+          </svg>
+        </a>
+      )
+    }
   </div>
 </Base>
 
@@ -30,8 +66,23 @@ import { photos } from "../lib/photos";
   h1 {
     @apply mt-6 text-4xl font-medium md:text-6xl;
   }
-  header p,
-  .empty {
-    @apply mt-2 font-light text-zinc-400;
+  header p {
+    @apply mt-3 max-w-2xl font-light text-pretty text-zinc-400;
+  }
+  header p a,
+  .note a {
+    @apply text-pink-300 underline decoration-pink-300/40 underline-offset-4 transition-colors hover:decoration-pink-300;
+  }
+  .note {
+    @apply font-poppins text-xl font-light text-zinc-300;
+  }
+  .more {
+    @apply mt-10 inline-flex items-center gap-2 rounded-full border-2 border-zinc-500 px-6 py-2.5 font-poppins transition-colors hover:border-white;
+  }
+  .more svg {
+    @apply h-4 w-4 transition-transform duration-200 ease-out;
+  }
+  .more:hover svg {
+    @apply translate-x-0.5;
   }
 </style>

@@ -1,5 +1,5 @@
 ---
-import { largest, photoUrl, srcset, type Photo } from "../lib/photos";
+import { fallbackSource, srcset, type Photo } from "../lib/flickr";
 
 interface Props {
   photo: Photo;
@@ -10,20 +10,16 @@ interface Props {
 }
 
 const { photo, sizes, eager = false, class: className } = Astro.props;
-const fallbackWidth = photo.widths.find((w) => w >= 1600) ?? largest(photo);
 ---
 
-<picture>
-  <source type="image/avif" srcset={srcset(photo, "avif")} sizes={sizes} />
-  <img
-    class={className}
-    src={photoUrl(photo, fallbackWidth, "jpg")}
-    srcset={srcset(photo, "jpg")}
-    sizes={sizes}
-    width={photo.width}
-    height={photo.height}
-    alt={photo.alt}
-    loading={eager ? "eager" : "lazy"}
-    decoding="async"
-  />
-</picture>
+<img
+  class={className}
+  src={fallbackSource(photo).url}
+  srcset={srcset(photo)}
+  sizes={sizes}
+  width={photo.width}
+  height={photo.height}
+  alt={photo.title || "Untitled photograph"}
+  loading={eager ? "eager" : "lazy"}
+  decoding="async"
+/>

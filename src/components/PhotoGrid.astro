@@ -1,14 +1,12 @@
 ---
 import Photo from "./Photo.astro";
-import { largest, photoUrl, type Photo as PhotoData } from "../lib/photos";
+import { details, type Photo as PhotoData } from "../lib/flickr";
 
 interface Props {
   photos: PhotoData[];
 }
 
 const { photos } = Astro.props;
-const details = (p: PhotoData) =>
-  [p.caption, p.film, p.camera, p.takenAt?.slice(0, 4)].filter(Boolean).join(" · ");
 ---
 
 <div class="gallery">
@@ -16,10 +14,10 @@ const details = (p: PhotoData) =>
     photos.map((photo, i) => (
       <a
         class="item"
-        href={photoUrl(photo, largest(photo), "jpg")}
-        data-avif={photoUrl(photo, largest(photo), "avif")}
-        data-alt={photo.alt}
+        href={photo.sources[photo.sources.length - 1].url}
+        data-alt={photo.title || "Untitled photograph"}
         data-details={details(photo)}
+        data-page={photo.pageUrl}
         style={`aspect-ratio: ${photo.width} / ${photo.height}`}
       >
         <Photo
@@ -48,19 +46,20 @@ const details = (p: PhotoData) =>
       <path stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"></path>
     </svg>
   </button>
-  <picture>
-    <source type="image/avif" />
-    <img alt="" />
-  </picture>
-  <p class="details"><span class="frame"></span><span class="text"></span></p>
+  <img alt="" />
+  <p class="details">
+    <span class="frame"></span><span class="text"></span><a class="on-flickr" target="_blank" rel="noopener"
+      >View on Flickr</a
+    >
+  </p>
 </dialog>
 
 <script>
   const dialog = document.querySelector<HTMLDialogElement>("dialog.lightbox")!;
-  const source = dialog.querySelector("source")!;
   const img = dialog.querySelector("img")!;
   const frame = dialog.querySelector(".frame")!;
   const text = dialog.querySelector(".details .text")!;
+  const onFlickr = dialog.querySelector<HTMLAnchorElement>(".on-flickr")!;
   const items = [...document.querySelectorAll<HTMLAnchorElement>(".gallery .item")];
   let current = 0;
 
@@ -68,11 +67,11 @@ const details = (p: PhotoData) =>
   const show = (index: number) => {
     current = (index + items.length) % items.length;
     const link = items[current];
-    source.srcset = link.dataset.avif ?? "";
     img.src = link.href;
     img.alt = link.dataset.alt ?? "";
     frame.textContent = `${String(current + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}`;
     text.textContent = link.dataset.details ?? "";
+    onFlickr.href = link.dataset.page ?? "";
   };
 
   items.forEach((link, i) => {
@@ -128,6 +127,14 @@ const details = (p: PhotoData) =>
 
   .details {
     @apply mt-3 flex justify-center gap-4 font-poppins text-sm font-light text-zinc-400;
+  }
+
+  .details .text:empty {
+    @apply hidden;
+  }
+
+  .on-flickr {
+    @apply text-zinc-300 underline decoration-zinc-500 underline-offset-4 transition-colors hover:text-white hover:decoration-white;
   }
 
   .frame {
