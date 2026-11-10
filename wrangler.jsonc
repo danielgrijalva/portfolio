@@ -1,0 +1,12 @@
+// Static pages are served as assets; anything else (the photo pages, and
+// unknown URLs, which get the prerendered 404) goes to the Worker.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "danielgrijalva-portfolio",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  }
+}

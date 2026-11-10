@@ -1,0 +1,172 @@
+---
+import Photo from "./Photo.astro";
+import { details, type Photo as PhotoData } from "../lib/flickr";
+
+interface Props {
+  photos: PhotoData[];
+}
+
+const { photos } = Astro.props;
+---
+
+<div class="gallery">
+  {
+    photos.map((photo, i) => (
+      <a
+        class="item"
+        href={photo.sources[photo.sources.length - 1].url}
+        data-alt={photo.title || "Untitled photograph"}
+        data-details={details(photo)}
+        data-page={photo.pageUrl}
+        style={`aspect-ratio: ${photo.width} / ${photo.height}`}
+      >
+        <Photo
+          photo={photo}
+          sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 100vw"
+          eager={i < 3}
+        />
+      </a>
+    ))
+  }
+</div>
+
+<dialog class="lightbox" aria-label="Photo viewer">
+  <button class="close" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+      <path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"></path>
+    </svg>
+  </button>
+  <button class="step prev" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m15 5-7 7 7 7"></path>
+    </svg>
+  </button>
+  <button class="step next" aria-label="Next photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"></path>
+    </svg>
+  </button>
+  <img alt="" />
+  <p class="details">
+    <span class="frame"></span><span class="text"></span><a class="on-flickr" target="_blank" rel="noopener"
+      >View on Flickr</a
+    >
+  </p>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("dialog.lightbox")!;
+  const img = dialog.querySelector("img")!;
+  const frame = dialog.querySelector(".frame")!;
+  const text = dialog.querySelector(".details .text")!;
+  const onFlickr = dialog.querySelector<HTMLAnchorElement>(".on-flickr")!;
+  const items = [...document.querySelectorAll<HTMLAnchorElement>(".gallery .item")];
+  let current = 0;
+
+  // Frames are counted like a contact sheet: 01, 02, 03...
+  const show = (index: number) => {
+    current = (index + items.length) % items.length;
+    const link = items[current];
+    img.src = link.href;
+    img.alt = link.dataset.alt ?? "";
+    frame.textContent = `${String(current + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}`;
+    text.textContent = link.dataset.details ?? "";
+    onFlickr.href = link.dataset.page ?? "";
+  };
+
+  items.forEach((link, i) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      show(i);
+      dialog.showModal();
+    });
+  });
+
+  dialog.classList.toggle("single", items.length < 2);
+  dialog.querySelector(".prev")!.addEventListener("click", () => show(current - 1));
+  dialog.querySelector(".next")!.addEventListener("click", () => show(current + 1));
+  dialog.querySelector(".close")!.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") show(current - 1);
+    if (event.key === "ArrowRight") show(current + 1);
+  });
+  // Clicking the dark backdrop (outside the photo) closes the viewer.
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  // Return focus to the photo you were on when the viewer closes.
+  dialog.addEventListener("close", () => items[current]?.focus());
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  .gallery {
+    @apply columns-1 gap-3 sm:columns-2 md:gap-4 xl:columns-3;
+  }
+
+  .item {
+    @apply mb-3 block overflow-hidden rounded-lg bg-zinc-800 break-inside-avoid md:mb-4;
+  }
+
+  .item :global(img) {
+    @apply h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02];
+  }
+
+  .lightbox {
+    @apply m-auto max-h-none max-w-none bg-transparent p-0 text-white;
+  }
+
+  .lightbox::backdrop {
+    @apply bg-black/90;
+  }
+
+  .lightbox img {
+    @apply max-h-[85vh] max-w-[92vw] object-contain;
+  }
+
+  .details {
+    @apply mt-3 flex justify-center gap-4 font-poppins text-sm font-light text-zinc-400;
+  }
+
+  .details .text:empty {
+    @apply hidden;
+  }
+
+  .on-flickr {
+    @apply text-zinc-300 underline decoration-zinc-500 underline-offset-4 transition-colors hover:text-white hover:decoration-white;
+  }
+
+  .frame {
+    @apply text-pink-300 tabular-nums;
+  }
+
+  .step {
+    @apply fixed top-1/2 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-zinc-300 transition-colors hover:bg-white/10 hover:text-white;
+  }
+
+  .step svg {
+    @apply h-6 w-6;
+  }
+
+  .prev {
+    @apply left-2 md:left-4;
+  }
+
+  .next {
+    @apply right-2 md:right-4;
+  }
+
+  .single .step,
+  .single .frame {
+    @apply hidden;
+  }
+
+  .close {
+    @apply fixed top-3 right-3 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-zinc-300 transition-colors hover:bg-white/10 hover:text-white;
+  }
+
+  .close svg {
+    @apply h-6 w-6;
+  }
+</style>

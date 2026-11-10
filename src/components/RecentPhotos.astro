@@ -1,0 +1,46 @@
+---
+// Rendered on the Worker as a server island, so the home page itself stays
+// static while this strip shows the latest uploads on Flickr.
+import Photo from "./Photo.astro";
+import { recentPhotos, type Photo as PhotoData } from "../lib/flickr";
+
+let photos: PhotoData[] = [];
+try {
+  photos = (await recentPhotos()).slice(0, 6);
+} catch (error) {
+  console.error(error);
+}
+
+Astro.response.headers.set("Cache-Control", "public, max-age=300");
+---
+
+{
+  photos.length > 0 ? (
+    <div class="photo-strip">
+      {photos.map((photo) => (
+        <a href={photo.pageUrl} class="photo-tile" target="_blank" rel="noopener">
+          <Photo photo={photo} sizes="(min-width: 768px) 22vw, 45vw" />
+        </a>
+      ))}
+    </div>
+  ) : (
+    <p class="empty">Couldn't load the latest photos from Flickr, but they're all on the photos page.</p>
+  )
+}
+
+<style>
+  @reference "../styles/global.css";
+
+  .photo-strip {
+    @apply grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4;
+  }
+  .photo-tile {
+    @apply block aspect-[4/5] overflow-hidden rounded-lg bg-zinc-800;
+  }
+  .photo-tile :global(img) {
+    @apply h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.03];
+  }
+  .empty {
+    @apply max-w-xl font-poppins text-xl font-light text-balance text-zinc-300;
+  }
+</style>

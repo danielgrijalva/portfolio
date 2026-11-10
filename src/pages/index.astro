@@ -1,0 +1,446 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Section from "../components/Section.astro";
+import RecentPhotos from "../components/RecentPhotos.astro";
+
+import a3 from "../assets/images/a3.webp";
+import avatarLarge from "../assets/images/avatar-lg.webp";
+import datasets from "../assets/images/datasets.webp";
+import ghostwriter from "../assets/images/ghostwriter.webp";
+import overworld from "../assets/images/overworld.webp";
+import portfolio from "../assets/images/portfolio.webp";
+import scrapers from "../assets/images/scrapers.webp";
+
+import MXIcon from "../assets/icons/MX.svg";
+
+const EMAIL = "danielgrisoto@gmail.com";
+const PASSIONS = ["film photography", "music", "Python", "making things", "data"];
+
+const featuredProject = {
+  title: "BeeMaps",
+  link: "https://beemaps.com.mx",
+  description:
+    "A real-estate platform for brokers and buyers in north-west México. I built it and I run it: started in August 2024, live since April 2025.",
+};
+
+const projects = [
+  {
+    title: "Overworld",
+    link: "https://github.com/danielgrijalva/overworld",
+    description: "A site for keeping track of the games I've played. Currently rebuilding it from scratch.",
+    image: overworld,
+    tools: ["Django", "React", "Redux"],
+  },
+  {
+    title: "Sistema A3",
+    link: "https://www.sistemaa3.com/propiedades/venta",
+    description: "The property system I built for a real-estate company, front to back.",
+    image: a3,
+    tools: ["Django", "JavaScript", "AWS S3"],
+  },
+  {
+    title: "Ghostwriter",
+    link: "https://github.com/danielgrijalva/ghostwriter",
+    description: "An experiment in AI-assisted writing.",
+    image: ghostwriter,
+    tools: ["Python", "Keras", "Vue.js"],
+  },
+  {
+    title: "Datasets",
+    link: "https://www.kaggle.com/danielgrijalvas",
+    description: "Datasets I've put together on Kaggle to answer questions I was curious about.",
+    image: datasets,
+    tools: ["Python", "Pandas"],
+  },
+  {
+    title: "Scrapers",
+    link: "https://github.com/danielgrijalva/infocasas",
+    description: "A pile of web scrapers, mostly for freelance clients.",
+    image: scrapers,
+    tools: ["Python", "Selenium", "BeautifulSoup"],
+  },
+  {
+    title: "This website",
+    link: "https://github.com/danielgrijalva/portfolio",
+    description: "The page you're on, plus the photo pipeline behind it.",
+    image: portfolio,
+    tools: ["Astro", "Tailwind", "Cloudflare R2"],
+  },
+];
+
+
+---
+
+<Base>
+  <Nav />
+  <main>
+    <Section id="hello">
+      <div class="hello">
+        <h1>
+          Hello. I am Daniel, a software engineer who loves{" "}
+          <span class="highlight" data-passions={JSON.stringify(PASSIONS)}
+            ><span class="word">{PASSIONS[0]}</span><span class="dot">.</span></span
+          >
+        </h1>
+        <p class="sub">
+          I live in México. By day I consult at Improving; the rest of the time I run BeeMaps, shoot film and listen to
+          too much music.
+        </p>
+      </div>
+    </Section>
+
+    <Section id="photography" title="Photography">
+      <div class="photography">
+        <RecentPhotos server:defer>
+          <div class="photo-strip" slot="fallback" aria-hidden="true">
+            {Array.from({ length: 6 }, () => <div class="photo-tile placeholder" />)}
+          </div>
+        </RecentPhotos>
+        <p class="photo-note">Shot on film, mostly with a Minolta SRT 101. These are the latest on Flickr.</p>
+        <a href="/photos" class="see-all">
+          See more photos
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 10h12m-5-5 5 5-5 5"></path>
+          </svg>
+        </a>
+      </div>
+    </Section>
+
+    <Section id="projects" title="Things I've made">
+      <p class="overview">
+        For a living I'm a consultant at Improving, building web services and platforms for large customers, mostly in
+        Python on AWS and lately with a lot of AI and vision pipelines. Before that I wrote backend APIs, built internal
+        tools from scratch and did a lot of freelance scraping and data work. On the side, I build things like these.
+      </p>
+      <div class="projects">
+        <div class="card card-hover project featured">
+          <a href={featuredProject.link} target="_blank" rel="noopener" class="project-title">
+            {featuredProject.title}
+          </a>
+          <p class="description">{featuredProject.description}</p>
+          <span class="visit">beemaps.com.mx</span>
+        </div>
+        {
+          projects.map((p) => (
+            <div class="card card-hover project">
+              <Image
+                src={p.image}
+                alt=""
+                class="banner"
+                widths={[320, 640]}
+                sizes="(min-width: 1280px) 300px, (min-width: 640px) 45vw, 90vw"
+              />
+              <a href={p.link} target="_blank" rel="noopener" class="project-title">
+                {p.title}
+              </a>
+              <p class="description">{p.description}</p>
+              <div class="tool-list">
+                {p.tools.map((t) => (
+                  <span>{t}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Section>
+
+    <Section id="me" title="About me">
+      <div class="me">
+        <div class="text">
+          <div class="name">My name is Daniel,</div>
+          <h2 class="pitch">I write software for a living and shoot film for fun.</h2>
+          <p class="bio">
+            Besides my day job I run{" "}
+            <a href="https://beemaps.com.mx" target="_blank" rel="noopener">BeeMaps</a>, a real-estate platform for
+            brokers and buyers in north-west México.
+          </p>
+          <p class="bio">
+            Outside of work I shoot film, mostly on a Minolta SRT 101, and I listen to a lot of music. The photographs
+            on this site are mine.
+          </p>
+          <div class="based">
+            based in
+            <div class="mx"><MXIcon /> México</div>
+          </div>
+          <div class="contact">
+            <div class="card email">
+              <a href={`mailto:${EMAIL}`} class="email-text">
+                <span class="text-sm text-zinc-400">The best way to reach me is email</span>
+                <span class="address">{EMAIL}</span>
+              </a>
+              <button class="copy" type="button" data-email={EMAIL} aria-label="Copy email address">
+                <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+                  <path stroke-linecap="round" d="M5 15V6a2 2 0 0 1 2-2h9"></path>
+                </svg>
+                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"></path>
+                </svg>
+              </button>
+              <span class="copied" role="status" aria-live="polite"></span>
+            </div>
+            <div class="buttons">
+              <a class="github" href="https://github.com/danielgrijalva" target="_blank" rel="noopener">GitHub</a>
+              <a class="x" href="https://x.com/danieleerie" target="_blank" rel="noopener">X</a>
+            </div>
+            <p class="elsewhere">
+              I'm also on{" "}<a href="https://www.kaggle.com/danielgrijalvas" target="_blank" rel="noopener">Kaggle</a>, and{" "}
+              <a href="https://www.last.fm/user/jdgsgt" target="_blank" rel="noopener">Last.fm</a> has what I've been listening to.
+            </p>
+          </div>
+        </div>
+        <Image
+          src={avatarLarge}
+          alt="Daniel Grijalva"
+          class="avatar"
+          widths={[224, 448]}
+          sizes="(min-width: 768px) 224px, 112px"
+        />
+      </div>
+    </Section>
+  </main>
+</Base>
+
+<script>
+  // Cycle through the words after "who loves", fading between them.
+  const highlight = document.querySelector<HTMLElement>("[data-passions]")!;
+  const word = highlight.querySelector<HTMLElement>(".word")!;
+  const passions: string[] = JSON.parse(highlight.dataset.passions!);
+  let i = 0;
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setInterval(() => {
+      highlight.classList.add("fading");
+      setTimeout(() => {
+        i = (i + 1) % passions.length;
+        word.textContent = passions[i];
+        highlight.classList.remove("fading");
+      }, 300);
+    }, 2300);
+  }
+
+  // Copy the email address, with a short confirmation.
+  const copy = document.querySelector<HTMLButtonElement>(".copy")!;
+  const status = document.querySelector<HTMLElement>(".copied")!;
+  let reset: number | undefined;
+  copy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(copy.dataset.email!);
+      copy.classList.add("done");
+      status.textContent = "Copied";
+    } catch {
+      status.textContent = "Couldn't copy. Select the address instead.";
+    }
+    clearTimeout(reset);
+    reset = window.setTimeout(() => {
+      copy.classList.remove("done");
+      status.textContent = "";
+    }, 1800);
+  });
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Hello */
+  .hello h1 {
+    @apply max-w-3xl font-poppins text-4xl leading-tight font-medium text-balance md:text-6xl md:leading-[1.1];
+    letter-spacing: -0.02em;
+  }
+  .highlight {
+    @apply text-pink-300 transition-opacity duration-300;
+  }
+  .highlight.fading {
+    @apply opacity-0;
+  }
+  .dot {
+    @apply text-white;
+  }
+  .sub {
+    @apply mt-8 max-w-xl font-poppins text-lg font-light text-pretty text-zinc-400 md:text-xl;
+  }
+
+  /* Photography */
+  .photo-strip {
+    @apply grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4;
+  }
+  .photo-tile {
+    @apply block aspect-[4/5] overflow-hidden rounded-lg bg-zinc-800;
+  }
+  .placeholder {
+    @apply animate-pulse;
+  }
+  .photo-note {
+    @apply mt-4 font-poppins text-sm font-light text-zinc-400;
+  }
+  .see-all {
+    @apply mt-8 inline-flex items-center gap-2 rounded-full border-2 border-zinc-500 px-6 py-2.5 font-poppins transition-colors hover:border-white;
+  }
+  .see-all svg {
+    @apply h-4 w-4 transition-transform duration-200 ease-out;
+  }
+  .see-all:hover svg {
+    @apply translate-x-0.5;
+  }
+
+  /* Projects */
+  .overview {
+    @apply mb-10 max-w-[65ch] font-poppins text-lg leading-relaxed font-light text-pretty text-zinc-300;
+  }
+  .projects {
+    @apply grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3;
+  }
+  .project {
+    @apply relative flex flex-col p-5 md:p-6;
+  }
+  .project :global(.banner) {
+    @apply mb-5 aspect-video w-full rounded-lg object-cover;
+  }
+  .project-title {
+    @apply font-poppins text-lg leading-snug font-semibold;
+  }
+  /* Makes the whole card clickable. */
+  .project-title::before {
+    @apply absolute inset-0 rounded-xl;
+    content: "";
+  }
+  .description {
+    @apply mt-1 mb-5 grow text-zinc-300;
+  }
+  .featured {
+    @apply sm:col-span-2 md:p-8 xl:col-span-3;
+  }
+  .featured .project-title {
+    @apply text-2xl md:text-3xl;
+  }
+  .featured .description {
+    @apply max-w-2xl text-lg;
+  }
+  .visit {
+    @apply w-fit rounded-md bg-pink-300 px-2 py-1 text-xs font-medium text-zinc-900;
+  }
+
+  /* About me */
+  .me {
+    @apply flex max-w-4xl flex-col-reverse items-start gap-6 md:flex-row md:items-center md:gap-12;
+  }
+  .text {
+    @apply flex-1 font-poppins font-light;
+  }
+  .name {
+    @apply mb-1 text-sm text-zinc-400 md:text-base;
+  }
+  .pitch {
+    @apply mb-4 text-2xl leading-tight font-semibold text-balance md:text-3xl;
+  }
+  .bio {
+    @apply max-w-[65ch] text-base leading-relaxed text-zinc-200;
+  }
+  .bio + .bio {
+    @apply mt-3;
+  }
+  .bio a,
+  .elsewhere a {
+    @apply text-pink-300 underline decoration-pink-300/40 underline-offset-4 transition-colors hover:decoration-pink-300;
+  }
+  .based {
+    @apply mt-8 flex items-center gap-3 text-zinc-400 md:text-lg;
+  }
+  .mx {
+    @apply inline-flex items-center gap-2 rounded-xl border-2 border-zinc-500 px-3 py-1.5 text-white;
+  }
+  .mx :global(svg) {
+    @apply h-auto w-5;
+  }
+  .me :global(.avatar) {
+    @apply w-28 flex-none rounded-full md:w-56;
+  }
+
+  /* Contact */
+  .contact {
+    @apply mt-10 flex w-full max-w-md flex-col gap-5 font-normal;
+  }
+  .email {
+    @apply relative flex items-center justify-between gap-4 p-5 sm:p-6;
+  }
+  .email-text {
+    @apply flex min-w-0 flex-col;
+  }
+  .address {
+    @apply truncate text-lg transition-colors sm:text-xl;
+  }
+  .email-text:hover .address {
+    @apply text-pink-300;
+  }
+  .copy {
+    @apply relative grid h-12 w-12 shrink-0 cursor-pointer place-items-center rounded-full bg-zinc-600 transition-colors hover:bg-zinc-500;
+    box-shadow:
+      0 0 0 4px #71717a60,
+      0 0 0 8px #71717a30;
+  }
+  .copy svg {
+    @apply col-start-1 row-start-1 h-5 w-5;
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .icon-check {
+    @apply scale-50 opacity-0;
+  }
+  .copy.done {
+    @apply bg-pink-300 text-zinc-900;
+  }
+  .copy.done .icon-copy {
+    @apply scale-50 opacity-0;
+  }
+  .copy.done .icon-check {
+    @apply scale-100 opacity-100;
+  }
+  .copied {
+    @apply absolute right-5 -bottom-7 text-sm text-pink-300 sm:right-6;
+  }
+  .buttons {
+    @apply mt-2 grid grid-cols-2 gap-4;
+  }
+  .buttons a {
+    @apply rounded-full px-3 py-3 text-center font-poppins text-sm whitespace-nowrap sm:text-base;
+    transition:
+      box-shadow 0.15s ease-out,
+      transform 0.1s ease-out;
+  }
+  .buttons a:active {
+    transform: scale(0.97);
+  }
+  .github {
+    @apply bg-pink-500;
+    box-shadow: 0 0 0 4px #ec489960;
+  }
+  .github:hover {
+    box-shadow:
+      0 0 0 4px #ec489960,
+      0 0 0 8px #ec489930,
+      0 0 0 12px #ec489915;
+  }
+  .x {
+    @apply bg-white text-zinc-900;
+    box-shadow: 0 0 0 4px #ffffff40;
+  }
+  .x:hover {
+    box-shadow:
+      0 0 0 4px #ffffff40,
+      0 0 0 8px #ffffff20,
+      0 0 0 12px #ffffff10;
+  }
+  .elsewhere {
+    @apply font-poppins text-sm font-light text-zinc-400;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .copy svg {
+      transition: none;
+    }
+  }
+</style>

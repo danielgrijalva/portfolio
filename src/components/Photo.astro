@@ -1,0 +1,25 @@
+---
+import { fallbackSource, srcset, type Photo } from "../lib/flickr";
+
+interface Props {
+  photo: Photo;
+  /** The `sizes` attribute: how wide the photo is shown on screen. */
+  sizes: string;
+  eager?: boolean;
+  class?: string;
+}
+
+const { photo, sizes, eager = false, class: className } = Astro.props;
+---
+
+<img
+  class={className}
+  src={fallbackSource(photo).url}
+  srcset={srcset(photo)}
+  sizes={sizes}
+  width={photo.width}
+  height={photo.height}
+  alt={photo.title || "Untitled photograph"}
+  loading={eager ? "eager" : "lazy"}
+  decoding="async"
+/>
